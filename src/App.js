@@ -5,10 +5,9 @@ import styled from 'styled-components';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import HomeRoute from './components/HomeRoute';
 import ResultsRoute from './components/ResultsRoute';
+import db from './DB';
 
-import BusinessFactory from './datagen/BusinessFactory';
-
-window.businessFactory = new BusinessFactory();
+window.db = db;
 
 class App extends Component {
   render() {

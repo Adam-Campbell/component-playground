@@ -76,7 +76,7 @@ const sortOptions = [
         label: 'Rating'
     },
     {
-        id: 'most_reviewed',
+        id: 'mostreviewed',
         label: 'Most Reviewed'
     }
 ];

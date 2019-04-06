@@ -3,9 +3,9 @@ import {
     streetNames,
     streetTypes
 } from './data';
-import Datagen from './Datagen';
+import DataGenerator from './DataGenerator';
 
-class AddressFactory extends Datagen {
+class AddressGenerator extends DataGenerator {
     constructor() {
         super();
         this.locations = locations;
@@ -55,4 +55,4 @@ class AddressFactory extends Datagen {
 
 }
 
-export default AddressFactory;
+export default AddressGenerator;

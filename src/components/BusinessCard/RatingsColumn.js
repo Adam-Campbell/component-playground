@@ -57,11 +57,11 @@ const ButtonLink = styled.a`
     }
 `;
 
-const RatingsColumn = ({ starRating, name, numberOfRatings }) => (
+const RatingsColumn = ({ starRating, id, numberOfRatings }) => (
     <RatingsColContainer>
         <StarRating 
             rating={starRating}
-            starGroupName={name}
+            starGroupName={id}
             numOfRatings={numberOfRatings}
         />
         <ReviewLink href="#">

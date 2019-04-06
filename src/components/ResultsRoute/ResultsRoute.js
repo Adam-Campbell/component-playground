@@ -25,6 +25,7 @@ import {
     ResultsHeaderButton,
     ResultsHeaderButtonIcon
 } from './elements';
+import Loader from '../Loader';
 
 export const ResultsRoute = (props) => (
     <Body>
@@ -95,16 +96,21 @@ export const ResultsRoute = (props) => (
                 /> 
             </ResultsAside>
             <ResultsMainContent>
-                <BusinessCard businessId="a1" />
-                <BusinessCard businessId="b2" />
-                <BusinessCard businessId="a1" />
-                <BusinessCard businessId="b2" />
+                {props.isFetchingData ? (
+                    <Loader />
+                ) : (
+                    props.results.map(business => (
+                        <BusinessCard business={business} key={business.id} />
+                    ))
+                )}
             </ResultsMainContent>
         </ResultsContentContainer>
     </Body>
 );
 
 ResultsRoute.propTypes = {
+    isFetchingData: PropTypes.bool.isRequired,
+    results: PropTypes.arrayOf(PropTypes.object).isRequired,
     serviceFieldValue: PropTypes.string,
     locationFieldValue: PropTypes.string,
     updateServiceFormField: PropTypes.func.isRequired,

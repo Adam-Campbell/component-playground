@@ -5,12 +5,12 @@ import {
     emailPrefixes,
     areaCodes
 } from './data';
-import BusinessNameFactory from './BusinessNameFactory';
-import AddressFactory from './AddressFactory';
-import ReviewFactory from './ReviewFactory';
-import Datagen from './Datagen';
+import BusinessNameGenerator from './BusinessNameGenerator';
+import AddressGenerator from './AddressGenerator';
+import ReviewGenerator from './ReviewGenerator';
+import DataGenerator from './DataGenerator';
 
-class BusinessFactory extends Datagen {
+export class BusinessGenerator extends DataGenerator {
     constructor() {
         super();
   	    this.locations = locations;
@@ -18,9 +18,9 @@ class BusinessFactory extends Datagen {
         this.TLDs = TLDs;
         this.emailPrefixes = emailPrefixes;
         this.areaCodes = areaCodes
-        this.businessNameFactory = new BusinessNameFactory();
-        this.addressFactory = new AddressFactory();
-        this.reviewFactory = new ReviewFactory();
+        this.businessNameFactory = new BusinessNameGenerator();
+        this.addressFactory = new AddressGenerator();
+        this.reviewFactory = new ReviewGenerator();
     }
 
     /**
@@ -89,6 +89,7 @@ class BusinessFactory extends Datagen {
      * @returns {Object} - a business object.
      */
     constructBusiness() {
+        const id = this.generateRandomId();
         const location = this.addressFactory.constructAddress();
         const services = this.getManyRandomArrayElements(
             this.services, 
@@ -103,10 +104,11 @@ class BusinessFactory extends Datagen {
         const reviews = this.reviewFactory.constructManyReviews(numOfReviewsToConstruct);
         const numberOfReviews = reviews.length;
         const averageRating = this.getAverageRating(reviews);
-        const photos = this.probabilityGate(0.6);
+        const photos = this.probabilityGate(0.6) ? [] : null;
         const videos = this.probabilityGate(0.4);
         const messaging = this.probabilityGate(0.4);
         const business = {
+            id,
             name: businessName,
             location,
             services,
@@ -132,5 +134,3 @@ class BusinessFactory extends Datagen {
   	    return new Array(numOfBusinesses).fill(null).map(el => this.constructBusiness());
     }
 }
-
-export default BusinessFactory;

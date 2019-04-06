@@ -6,34 +6,25 @@ import {
     locationData
 } from '../ResultsFilter/resultsData';
 import queryString from 'query-string';
+import db from '../../DB'
 
 
 const formatString = (str) => str.replace(/_/g, ' ');
 
-/*
+const constructDBRequestObject = (service, location, category, contentrequirements, sortby) => {
+    const req = {
+        businessFunction: service,
+        location,
+        sortby
+    };
+    if (category) req.category = category;
+    if (contentrequirements.includes('websites')) req.requireWebsite = true;
+    if (contentrequirements.includes('photos')) req.requirePhotos = true;
+    if (contentrequirements.includes('reviews')) req.requireReviews = true;
+    if (contentrequirements.includes('messaging')) req.requireMessaging = true;
+    return req;
+}
 
-TODO
-
-In componentDidMount...
-- Grab all of the relevant state information from the url params (/results/:service/:location/) and
-from any query params that have been added to the url. Update the pages state accordingly.
-
-In componentDidUpdate
-Check if any of the data in the url has changed from prev props to current props. Everything that needs to 
-be checked (the url params and the query string) are just string values, so can just be checked with the strict
-equality operator. However if the query string has changed it will need to be parsed to obtain the actual values.
-If anything has changed between the url params and query string from prev props vs current props, then update
-component state accordingly. 
-
-
-This will require a review of naming conventions used for different things in the app, I need to make sure it
-all matches up for this to work nicely.
-
-- Check that the form is actually working correctly and preventing you from 
-submitting if you don't have both a service and a location. 
-
-
-*/
 
 const defaultFilterState = {
     category: null,
@@ -70,6 +61,8 @@ export class ResultsRouteContainer extends Component {
 
     state = {
         showingFilters: false,
+        isFetchingData: false,
+        results: [],
         service: this.props.currentSearchService || '',
         location: this.props.currentSearchLocation || '',
         category: null,
@@ -85,9 +78,11 @@ export class ResultsRouteContainer extends Component {
             const filterState = mergeState(parsedParams);
             this.setState({
                 ...filterState
-            });
-            //console.log(parsedParams);
+            }, this.makeDBRequest);
+        } else {
+            this.makeDBRequest();
         }
+        
     }
 
     componentDidUpdate(prevProps) {
@@ -110,7 +105,33 @@ export class ResultsRouteContainer extends Component {
         this.setState({
             ...formState,
             ...filterState
+        }, this.makeDBRequest);
+    }
+
+    async makeDBRequest() {
+        const {
+            service,
+            location,
+            category,
+            contentrequirements,
+            sortby
+        } = this.state;
+        const req = constructDBRequestObject(service, location, category, contentrequirements, sortby);
+        console.log(req);
+        this.setState({
+            isFetchingData: true
         });
+        try {
+            const results = await db.getResults(req);
+            this.setState({
+                isFetchingData: false,
+                results: results.businesses
+            });
+            console.log(results);
+        } catch (err) {
+            console.log(err);
+        }
+
     }
 
     /**
@@ -265,7 +286,9 @@ export class ResultsRouteContainer extends Component {
 
     render() {
         const { 
-            showingFilters, 
+            showingFilters,
+            isFetchingData,
+            results, 
             service, 
             location,
             category,
@@ -280,6 +303,8 @@ export class ResultsRouteContainer extends Component {
         const updateLocationRefinement = this.updateLocationFilters('locationrefinement', 'distance');
 
         return <ResultsRoute 
+            isFetchingData={isFetchingData}
+            results={results}
             serviceFieldValue={service}
             locationFieldValue={location}
             updateServiceFormField={this.updateServiceFormField}

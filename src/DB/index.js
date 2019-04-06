@@ -1,3 +1,3 @@
-import { db } from './DB';
+import { DB } from './DB';
 
-export default db;
+export default new DB();

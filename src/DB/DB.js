@@ -1,15 +1,13 @@
-import BusinessFactory from './BusinessFactory';
-import processRequest from './processRequest';
-class DB {
+import businessGenerator from '../BusinessGenerator';
+import processDBRequest from '../processDBRequest';
+export class DB {
     constructor() {
-        this.businessFactory = new BusinessFactory();
-        this.businesses = this.businessFactory.constructManyBusinesses(5000);
+        this.businesses = businessGenerator.constructManyBusinesses(10000);
     }
 
-    getResults(req) {
-        return processRequest(req, this.businesses);
+    async getResults(req) {
+        const MSDelay = Math.floor(Math.random() * 300);
+        await new Promise(resolve => setTimeout(resolve, MSDelay));
+        return processDBRequest(req, this.businesses);
     }
 }
-
-export const db = new DB();
-

@@ -4,9 +4,9 @@ import {
     surnameAugmentations,
     businessSuffixes
 } from './data';
-import Datagen from './Datagen';
+import DataGenerator from './DataGenerator';
 
-class BusinessNameFactory extends Datagen {
+class BusinessNameGenerator extends DataGenerator {
     constructor() {
         super();
         this.firstNames = firstNames;
@@ -112,4 +112,4 @@ class BusinessNameFactory extends Datagen {
     }
 }
 
-export default BusinessNameFactory;
+export default BusinessNameGenerator;

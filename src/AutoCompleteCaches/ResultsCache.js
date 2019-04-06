@@ -1,5 +1,3 @@
-import { servicesNetworkRequest, locationsNetworkRequest } from './dataRetreivalFunctions';
-
 class ResultsCache {
     constructor(dataRetreivalFunc, cacheLimit) {
         if (!dataRetreivalFunc || ! cacheLimit) {
@@ -42,6 +40,4 @@ class ResultsCache {
     }
 }
 
-
-export const servicesWithCache = new ResultsCache(servicesNetworkRequest, 100);
-export const locationsWithCache = new ResultsCache(locationsNetworkRequest, 100);
+export default ResultsCache;

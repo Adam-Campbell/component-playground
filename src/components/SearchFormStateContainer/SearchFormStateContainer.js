@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { servicesWithCache, locationsWithCache } from '../../utils';
+//import { servicesWithCache, locationsWithCache } from '../../utils';
+import { servicesAutoCompleteCache, locationsAutoCompleteCache } from '../../AutoCompleteCaches';
 import { withRouter } from 'react-router-dom';
 
 
@@ -59,8 +60,8 @@ export class SearchFormStateContainer extends Component {
         locationFieldIsFresh: true
     };
 
-    servicesWithCache = servicesWithCache;
-    locationsWithCache = locationsWithCache;
+    servicesAutoCompleteCache = servicesAutoCompleteCache;
+    locationsAutoCompleteCache = locationsAutoCompleteCache;
 
     componentDidUpdate(prevProps) {
         if (
@@ -78,7 +79,7 @@ export class SearchFormStateContainer extends Component {
         let newSuggestions = [];
         if (query !== '') {
             const lowerQuery = query.toLowerCase();
-            newSuggestions = await this.servicesWithCache.getResults(lowerQuery);
+            newSuggestions = await this.servicesAutoCompleteCache.getResults(lowerQuery);
         }
         this.setState({
             serviceFieldSuggestions: newSuggestions
@@ -89,7 +90,7 @@ export class SearchFormStateContainer extends Component {
         let newSuggestions = [];
         if (query !== '') {
             const lowerQuery = query.toLowerCase();
-            newSuggestions = await this.locationsWithCache.getResults(lowerQuery);
+            newSuggestions = await this.locationsAutoCompleteCache.getResults(lowerQuery);
         }
         this.setState({
             locationFieldSuggestions: newSuggestions

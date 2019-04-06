@@ -38,6 +38,7 @@ export const ResultsContentContainer = styled(Row)`
 `;
 
 export const ResultsMainContent = styled.main`
+    position: relative;
     width: 748px;
     flex-shrink: 0;
     min-height: 400px;

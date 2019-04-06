@@ -73,6 +73,9 @@ const LoyaltyText = styled.span`
 
 const CategoryRow = styled.div`
     display: flex;
+    flex-wrap: wrap;
+    margin-left: -10px;
+    margin-right: -10px;
     margin-bottom: 10px;
 `;
 
@@ -82,10 +85,9 @@ const CategoryLabel = styled.p`
     font-size: 0.85rem;
     margin-top: 5px;
     margin-bottom: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
     color: #222;
-    & + & {
-        margin-left: 20px;
-    }
 `;
 
 const LinkRow = styled.div`

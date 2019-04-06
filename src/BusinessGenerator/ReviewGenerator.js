@@ -4,9 +4,9 @@ import {
     surnames,
     reviewTitles
 } from './data';
-import Datagen from './Datagen';
+import DataGenerator from './DataGenerator';
 
-class ReviewFactory extends Datagen {
+class ReviewGenerator extends DataGenerator {
 
     constructor() {
         super();
@@ -72,4 +72,4 @@ class ReviewFactory extends Datagen {
     }
 }
 
-export default ReviewFactory;
+export default ReviewGenerator;

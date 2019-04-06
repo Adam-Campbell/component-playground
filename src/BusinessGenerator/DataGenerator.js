@@ -1,7 +1,18 @@
 /**
  * Base class that all of the factory classes inherit methods from.
  */
+
 class Datagen {
+
+    /**
+     * Generates a random id string comprised of 16 characters in the range 0 - 9
+     * @returns {String} - the generated id string.
+     */
+    generateRandomId() {
+        return new Array(16).fill(null)
+                            .map(() => Math.floor(Math.random() * 10).toString())
+                            .join('');
+    }
 
     /**
      * Given an array, return a randomly chosen element from that array.

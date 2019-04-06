@@ -42,7 +42,7 @@ export const BusinessCard = (props) => (
         <RatingsColumn 
             starRating={props.starRating}
             numberOfRatings={props.numberOfRatings}
-            name={props.name}
+            id={props.id}
         />
     </BusinessCardContainer>
 );

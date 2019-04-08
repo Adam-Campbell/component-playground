@@ -1,7 +1,6 @@
 /**
- * Base class that all of the factory classes inherit methods from.
+ * Base class that all of the other generator classes inherit methods from. 
  */
-
 class Datagen {
 
     /**

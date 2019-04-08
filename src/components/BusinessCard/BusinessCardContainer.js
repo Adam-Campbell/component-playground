@@ -1,6 +1,5 @@
 import React from 'react';
 import { BusinessCard } from './BusinessCard';
-import data from '../../data';
 import PropTypes from 'prop-types';
 import SartiProfileImage from '../../images/sarti-profile.webp';
 
@@ -13,9 +12,8 @@ const mainServices = [
     'Main service six'
 ];
 
-export const BusinessCardContainer = ({ business }) => {
-    //const businessData = data[businessId];
-    return <BusinessCard 
+export const BusinessCardContainer = ({ business }) => (
+    <BusinessCard 
         id={business.id}
         profileImage={SartiProfileImage}
         name={business.name}
@@ -30,9 +28,8 @@ export const BusinessCardContainer = ({ business }) => {
         starRating={business.averageRating === null ? 0 : business.averageRating}
         numberOfRatings={business.numberOfReviews}
     />
-}
+);
 
 BusinessCardContainer.propTypes = {
-    //businessId: PropTypes.string.isRequired
     business: PropTypes.object
 };

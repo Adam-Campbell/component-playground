@@ -6,7 +6,12 @@ import {
 } from './data';
 import DataGenerator from './DataGenerator';
 
+/**
+ * A class for generating a random business name.
+ * @extends DataGenerator
+ */
 class BusinessNameGenerator extends DataGenerator {
+
     constructor() {
         super();
         this.firstNames = firstNames;

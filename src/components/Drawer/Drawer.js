@@ -23,7 +23,8 @@ export class Drawer extends Component {
         groupName: PropTypes.string,
         canSelectMultiple: PropTypes.bool.isRequired,
         selectionState: PropTypes.any,
-        handleChange: PropTypes.func
+        handleChange: PropTypes.func,
+        shouldCapitalize: PropTypes.bool
     };
 
     state = {
@@ -38,7 +39,15 @@ export class Drawer extends Component {
 
     render() {
         const { isOpen } = this.state;
-        const { title, options, groupName, canSelectMultiple, selectionState, handleChange } = this.props;
+        const { 
+            title, 
+            options, 
+            groupName, 
+            canSelectMultiple, 
+            selectionState, 
+            handleChange, 
+            shouldCapitalize
+        } = this.props;
         return (
             <Container>
                 <Fieldset>
@@ -57,11 +66,11 @@ export class Drawer extends Component {
                                     <Input
                                         id={option.id}
                                         type="checkbox"
-                                        checked={selectionState.includes(option.lower)}
-                                        onChange={(e) => handleChange(option.lower, e.target.checked)}
+                                        checked={selectionState.includes(option.text)}
+                                        onChange={(e) => handleChange(option.text, e.target.checked)}
                                     />
-                                    <InputLabel htmlFor={option.id}>
-                                        {option.label}
+                                    <InputLabel htmlFor={option.id} capitalize={shouldCapitalize}>
+                                        {option.text}
                                     </InputLabel>
                                 </InputContainer> 
                             ))}
@@ -74,16 +83,16 @@ export class Drawer extends Component {
                                         id={option.id}
                                         type="radio"
                                         name={groupName}
-                                        checked={selectionState === option.lower}
+                                        checked={selectionState === option.text}
                                         onClick={() => {
-                                            if (selectionState === option.lower) {
+                                            if (selectionState === option.text) {
                                                 this.props.handleChange(null);
                                             }
                                         }}
-                                        onChange={() => handleChange(option.lower)}   
+                                        onChange={() => handleChange(option.text)}   
                                     />
-                                    <InputLabel htmlFor={option.id}>
-                                        {option.label}
+                                    <InputLabel htmlFor={option.id} capitalize={shouldCapitalize}>
+                                        {option.text}
                                     </InputLabel>
                                 </InputContainer> 
                             ))}

@@ -6,6 +6,10 @@ import {
 } from './data';
 import DataGenerator from './DataGenerator';
 
+/**
+ * A class for generating a random review. 
+ * @extends DataGenerator
+ */
 class ReviewGenerator extends DataGenerator {
 
     constructor() {
@@ -29,8 +33,8 @@ class ReviewGenerator extends DataGenerator {
      * @returns {Array} - the created array of lorem ipsum strings.
      */
     getRandomReviewBody() {
-        const numOfParagraphs = this.getRandomNumFromRange(2, this.loremIpsumPassages.length);
-        return this.getManyRandomArrayElements(this.loremIpsumPassages, numOfParagraphs);
+        //const numOfParagraphs = this.getRandomNumFromRange(2, this.loremIpsumPassages.length);
+        return this.getManyRandomArrayElements(this.loremIpsumPassages, 1);
     }
 
     /**

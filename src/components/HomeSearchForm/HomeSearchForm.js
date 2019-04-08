@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SearchFormStateContainer from '../SearchFormStateContainer';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faTimes, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import Input from './Input';
 import {
     Form, 
@@ -46,7 +45,7 @@ export const HomeSearchForm = (props) => (
                             hasError={serviceFieldHasError}
                         />
                         <Input 
-                            icon={faSearch}
+                            icon={faMapMarkerAlt}
                             placeholder="UK, town or postcode"
                             value={locationFieldValue}
                             handleChange={updateLocationField}
@@ -62,3 +61,8 @@ export const HomeSearchForm = (props) => (
         )}
     </SearchFormStateContainer>
 );
+
+HomeSearchForm.propTypes = {
+    serviceFieldValue: PropTypes.string,
+    locationFieldValue: PropTypes.string
+};

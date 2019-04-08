@@ -5,7 +5,12 @@ import {
 } from './data';
 import DataGenerator from './DataGenerator';
 
+/**
+ * A class for generating a random address including street address, city and postcode. 
+ * @extends DataGenerator
+ */
 class AddressGenerator extends DataGenerator {
+    
     constructor() {
         super();
         this.locations = locations;

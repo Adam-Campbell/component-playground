@@ -1,4 +1,4 @@
-import findAllMatchingBusinesses, { constructMatchersArray } from './findAllMatchingBusinesses';
+import findAllMatchingBusinesses from './findAllMatchingBusinesses';
 import sortBusinesses from './sortBusinesses';
 import paginateBusinesses from './paginateBusinesses';
 

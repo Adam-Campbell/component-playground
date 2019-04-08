@@ -72,6 +72,7 @@ export const InputLabel = styled.label`
     display: flex;
     align-items: center;
     cursor: pointer;
+    ${({ capitalize }) => capitalize && 'text-transform: capitalize;'}
     &:hover {
         text-decoration: underline;
         color: #0083c3

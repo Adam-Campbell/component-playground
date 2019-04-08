@@ -1,30 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import ImageColumn from './ImageColumn';
 import InfoColumn from './InfoColumn';
 import RatingsColumn from './RatingsColumn';
-
-const BusinessCardContainer = styled.article`
-    width: 100%;
-    min-height: 150px;
-    margin: 0 auto;
-    padding: 20px 10px;
-    cursor: pointer;
-    border: solid 1px #aaa;
-    border-radius: 4px;
-    display: flex;
-    align-items: stretch;
-    &:hover {
-        box-shadow: 0px 0px 5px #ccc;
-    }
-    & + & {
-        margin-top: 30px;
-    }
-`;
+import { StyledBusinessCardContainer } from './BusinessCardElements';
 
 export const BusinessCard = (props) => (
-    <BusinessCardContainer>
+    <StyledBusinessCardContainer>
         <ImageColumn 
             profileImage={props.profileImage}
         />
@@ -44,7 +26,7 @@ export const BusinessCard = (props) => (
             numberOfRatings={props.numberOfRatings}
             id={props.id}
         />
-    </BusinessCardContainer>
+    </StyledBusinessCardContainer>
 );
 
 BusinessCard.propTypes = {

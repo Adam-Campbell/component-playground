@@ -10,7 +10,12 @@ import AddressGenerator from './AddressGenerator';
 import ReviewGenerator from './ReviewGenerator';
 import DataGenerator from './DataGenerator';
 
+/**
+ * A class for generating a complete business object.
+ * @extends DataGenerator
+ */
 export class BusinessGenerator extends DataGenerator {
+    
     constructor() {
         super();
   	    this.locations = locations;

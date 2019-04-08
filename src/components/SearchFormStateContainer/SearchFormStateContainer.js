@@ -110,6 +110,7 @@ export class SearchFormStateContainer extends Component {
     };
 
     updateServiceField = (value) => {
+        console.log('initial call: ', Date.now());
         if (this.props.isSelfControlled) {
             this.setState({
                 serviceFieldValue: value,

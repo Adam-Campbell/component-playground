@@ -115,7 +115,6 @@ ResultsRoute.propTypes = {
     locationFieldValue: PropTypes.string,
     updateServiceFormField: PropTypes.func.isRequired,
     updateLocationFormField: PropTypes.func.isRequired,
-    handleFormSubmit: PropTypes.func.isRequired,
     breadcrumbsArray: PropTypes.arrayOf(PropTypes.object).isRequired,
     showingFilters: PropTypes.bool.isRequired,
     toggleFilters: PropTypes.func.isRequired,

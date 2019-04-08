@@ -49,7 +49,7 @@ const getSocialPlatformProps = (platform) => {
 export const SocialShareLink = ({ platform }) => {
     const { icon, hoverColor } = getSocialPlatformProps(platform);
     return (
-        <StyledSocialShareLink hoverColor={hoverColor}>
+        <StyledSocialShareLink href="/" hoverColor={hoverColor}>
             <FontAwesomeIcon icon={icon} />
         </StyledSocialShareLink>
     );

@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import SearchFormStateContainer from '../SearchFormStateContainer';
 import Input from './Input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-//import Input from '../HomeSearchForm/Input';
 import {
     Form,
     Fieldset,
@@ -70,3 +68,13 @@ export const ResultsSearchForm = (props) => (
         )}
     </SearchFormStateContainer>
 );
+
+ResultsSearchForm.propTypes = {
+    serviceFieldValue: PropTypes.string,
+    locationFieldValue: PropTypes.string,
+    isSelfControlled: PropTypes.bool,
+    handleServiceFieldUpdate: PropTypes.func,
+    handleLocationFieldUpdate: PropTypes.func,
+    handleFormSubmit: PropTypes.func
+};
+

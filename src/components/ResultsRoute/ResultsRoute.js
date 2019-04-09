@@ -10,13 +10,8 @@ import SocialShareLink from '../SocialShareLink';
 import SortBy from '../SortBy';
 import { faSlidersH, faMapMarkerAlt, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import {
-    Body,
     HeaderContentContainer,
     Logo,
-    Shortlist,
-    ResultsContentContainer,
-    ResultsMainContent,
-    ResultsAside,
     MapPod,
     BreadcrumbsRow,
     SocialShareLinksContainer,
@@ -26,9 +21,18 @@ import {
     ResultsHeaderButtonIcon
 } from './elements';
 import Loader from '../Loader';
+import ShortlistCount from '../ShortlistCount';
+import ShortlistSummary from '../ShortlistSummary';
+import { 
+    SplitLayoutContainer,
+    SplitLayoutMain,
+    SplitLayoutAside,
+    SplitLayoutBody
+} from '../LayoutElements';
+
 
 export const ResultsRoute = (props) => (
-    <Body>
+    <SplitLayoutBody>
         <Header>
             <HeaderContentContainer>
                 <Logo as="a" href="/" />
@@ -40,9 +44,7 @@ export const ResultsRoute = (props) => (
                     handleFormSubmit={props.redirectURL}
                     isSelfControlled={false}
                 />
-                <Shortlist>
-                    Shortlist (0)
-                </Shortlist>
+                <ShortlistCount />
                 <LoginLink />
             </HeaderContentContainer>
         </Header>
@@ -79,8 +81,8 @@ export const ResultsRoute = (props) => (
                 updateSortCriteria={props.updateSortCriteria}
             />
         </ResultsHeaderRow>
-        <ResultsContentContainer>
-            <ResultsAside showFilters={props.showingFilters}>
+        <SplitLayoutContainer>
+            <SplitLayoutAside showAside={props.showingFilters}>
                 <MapPod />
                 <ResultsFilter 
                     categoryData={props.categoryData}
@@ -94,8 +96,9 @@ export const ResultsRoute = (props) => (
                     updateDistanceFilter={props.updateDistanceFilter}
                     updateLocationRefinement={props.updateLocationRefinement}
                 /> 
-            </ResultsAside>
-            <ResultsMainContent>
+                <ShortlistSummary />
+            </SplitLayoutAside>
+            <SplitLayoutMain>
                 {props.isFetchingData ? (
                     <Loader />
                 ) : (
@@ -103,9 +106,9 @@ export const ResultsRoute = (props) => (
                         <BusinessCard business={business} key={business.id} />
                     ))
                 )}
-            </ResultsMainContent>
-        </ResultsContentContainer>
-    </Body>
+            </SplitLayoutMain>
+        </SplitLayoutContainer>
+    </SplitLayoutBody>
 );
 
 ResultsRoute.propTypes = {

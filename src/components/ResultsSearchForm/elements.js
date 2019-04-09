@@ -127,6 +127,7 @@ export const SuggestionsList = styled.ul`
     border: solid 1px #aaa;
     border-top: none;
     width: 100%;
+    z-index: 1000;
 `;
 
 export const SuggestionItem = styled.li`

@@ -3,10 +3,6 @@ import SpriteSheet from '../SpriteSheet';
 import { Row } from '../LayoutElements';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const Body = styled.div`
-    overflow-x: hidden;
-`;
-
 export const HeaderContentContainer = styled(Row)`
     display: flex;
     align-items: flex-start;
@@ -18,50 +14,6 @@ export const Logo = styled(SpriteSheet)`
     height: 42px;
     background-position: 0 -365px;
     flex-shrink: 0;
-`;
-
-export const Shortlist = styled.p`
-    font-family: 'Lato';
-    font-weight: 400;
-    font-size: 1.1rem;
-    color: #222;
-    flex-shrink: 0;
-    margin: 0 10px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-`;
-
-
-export const ResultsContentContainer = styled(Row)`
-    display: flex;
-`;
-
-export const ResultsMainContent = styled.main`
-    position: relative;
-    width: 748px;
-    flex-shrink: 0;
-    min-height: 400px;
-    @media (min-width: 960px) {
-        width: calc(100% - 260px);
-    }
-    @media (min-width: 1250px) {
-        width: calc(100% - 340px);
-    }
-`;
-
-export const ResultsAside = styled.aside`
-    display: ${({ showFilters }) => showFilters ? 'initial' : 'none'};
-    width: 260px;
-    flex-shrink: 0;
-    min-height: 400px;
-    padding-right: 30px;
-    @media (min-width: 960px) {
-        display: initial;
-    }
-    @media (min-width: 1250px) {
-        width: 340px;
-    }
 `;
 
 export const MapPod = styled.div`

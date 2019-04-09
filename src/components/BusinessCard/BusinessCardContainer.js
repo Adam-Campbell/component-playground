@@ -27,6 +27,7 @@ export const BusinessCardContainer = ({ business }) => (
         quote={business.reviews.length ? business.reviews[0].body[0] : null}
         starRating={business.averageRating === null ? 0 : business.averageRating}
         numberOfRatings={business.numberOfReviews}
+        businessObject={business}
     />
 );
 

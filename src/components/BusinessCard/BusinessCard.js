@@ -25,6 +25,7 @@ export const BusinessCard = (props) => (
             starRating={props.starRating}
             numberOfRatings={props.numberOfRatings}
             id={props.id}
+            businessObject={props.businessObject}
         />
     </StyledBusinessCardContainer>
 );

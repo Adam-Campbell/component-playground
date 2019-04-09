@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import HomeRoute from './components/HomeRoute';
 import ResultsRoute from './components/ResultsRoute';
+import ShortlistRoute from './components/ShortlistRoute';
 import db from './DB';
 
 window.db = db;
@@ -24,6 +25,7 @@ class App extends Component {
               />
             )}
           />
+          <Route path="/shortlist" render={() => <ShortlistRoute />}/>
         </Switch>
       </BrowserRouter>
     );

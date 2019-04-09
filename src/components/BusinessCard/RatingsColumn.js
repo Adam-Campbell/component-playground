@@ -8,8 +8,9 @@ import {
     ShortlistLink,
     RatingsColButtonLink
 } from './RatingsColumnElements';
+import ShortlistButton from './ShortlistButton';
 
-const RatingsColumn = ({ starRating, id, numberOfRatings }) => (
+const RatingsColumn = ({ starRating, id, numberOfRatings, businessObject }) => (
     <RatingsColContainer>
         <StarRating 
             rating={starRating}
@@ -20,15 +21,20 @@ const RatingsColumn = ({ starRating, id, numberOfRatings }) => (
             Write a review
         </ReviewLink>
         <AdditionalLinksContainer>
-            <ShortlistLink to="/">
-                Shortlist
-            </ShortlistLink>
+            <ShortlistButton businessId={id} businessObject={businessObject} />
             <RatingsColButtonLink to="/">
                 More info
             </RatingsColButtonLink>
         </AdditionalLinksContainer>
     </RatingsColContainer>
 );
+
+
+/*
+<ShortlistLink to="/">
+                Shortlist
+            </ShortlistLink>
+*/
 
 RatingsColumn.propTypes = {
     starRating: PropTypes.number,

@@ -2,7 +2,7 @@ import businessGenerator from '../BusinessGenerator';
 import processDBRequest from '../processDBRequest';
 export class DB {
     constructor() {
-        this.businesses = businessGenerator.constructManyBusinesses(500);
+        this.businesses = businessGenerator.constructManyBusinesses(5000);
     }
 
     async getResults(req) {

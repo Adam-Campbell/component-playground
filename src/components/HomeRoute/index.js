@@ -1,3 +1,4 @@
 import { HomeRoute } from './HomeRoute';
+import { withRouter } from 'react-router-dom';
 
-export default HomeRoute;
+export default withRouter(HomeRoute);

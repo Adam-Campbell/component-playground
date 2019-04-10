@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const StyledShortlistCount = styled(Link)`
+export const ShortlistCountContainer = styled.div`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 1.1rem;
@@ -12,24 +12,28 @@ export const StyledShortlistCount = styled(Link)`
     display: flex;
     align-items: center;
     text-decoration: none;
-    &:hover {
-        text-decoration: underline;
-    }
 `;
 
-export const StyledShortlistCountWithItems = styled(StyledShortlistCount)`
+export const ShortlistCountLink = styled(Link)`
+    display: flex;
+    align-items: center;
     color: #0083c3;
+    text-decoration: none;
+    &:hover p {
+        text-decoration: underline;
+    }
 `;
 
 export const ShortlistNumber = styled.span`
     display: inline-block;
     background: #1abc9c;
     color: white;
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     margin-left: 5px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: none;
 `;

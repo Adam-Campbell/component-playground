@@ -17,29 +17,84 @@ matcher functions that are most likely to fail are tested first. In this way, un
 
 */
 
-const doesIncludeBusinessFunction = (businessFunction) => (business) => { 
-    for (let service of business.services) {
-        if (service.toLowerCase().includes(businessFunction)) {
+
+/**
+ * A matcher function for business services. Takes a business and a service, and returns true if the business
+ * includes that service, otherwise false. Utilises partial application, the first call sets the service and 
+ * returns a function that accepts the business, to be tested against that service. This allows it to called
+ * with a single argument, the same way most of the other matcher functions are.  
+ * @param {String} service - the service to check for.
+ * @param {Object} business - the business to check.
+ * @returns {Boolean} - whether or not the given business includes the given service.
+ */
+const doesIncludeService = (service) => (business) => { 
+    for (let serviceString of business.services) {
+        if (serviceString.toLowerCase().includes(service)) {
             return true;
         }
     }
     return false;
 };
 
+/**
+ * Checks whether a business matches a given location, returning true if it does, and false if it does not. 
+ * Partially applied for the same reason as the doesIncludeService function. 
+ * @param {String} location - the location to test for.
+ * @param {Object} business - the business to test.
+ * @returns {Boolean} - whether or not the given business matches the given location.
+ */
 const doesMatchLocation = (location) => (business) => business.location.city.toLowerCase().includes(location);
+
+/**
+ * Returns true if the given business has a website, else returns false.
+ * @param {Object} business - the business to test.
+ * @returns {Boolean} - whether or not the given business has a website.
+ */
 const doesHaveWebsite = (business) => business.website !== null;
+
+/**
+ * Returns true if the given business has reviews, else returns false.
+ * @param {Object} business - the business to test.
+ * @returns {Boolean} - whether or not the given business has reviews.
+ */
 const doesHaveReviews = (business) => business.reviews.length > 0;
+
+/**
+ * Returns true if the given business has photos, else returns false.
+ * @param {Object} business - the business to test.
+ * @returns {Boolean} - whether or not the given business has photos.
+ */
 const doesHavePhotos = (business) => business.photos !== null;
+
+/**
+ * Returns true if the given business has videos, else returns false.
+ * @param {Object} business - the business to test.
+ * @returns {Boolean} - whether or not the given business has videos. 
+ */
 const doesHaveVideos = (business) => business.videos;
+
+/**
+ * Returns true if the given business has messaging, else returns false. 
+ * @param {Object} business - the business to test.
+ * @returns {Boolean} - whether or not the given business has messaging.  
+ */
 const doesHaveMessaging = (business) => business.messaging;
 
-export const constructMatchersArray = (req) => {
+/**
+ * Takes the request object and uses its params to determine which matcher function should be used to process
+ * this request. The required matcher functions are added to an array, with the ones that require partial
+ * application being called in the process. 
+ * @param {Object} req - the request object supplied to the module. 
+ * @returns {Array} - an array of matcher to functions to be called against each business in the DB in order
+ * to process the request.
+ */
+const constructMatchersArray = (req) => {
     const matchersArray = [
-        doesIncludeBusinessFunction(req.businessFunction),
+        doesIncludeService(req.businessFunction),
         doesMatchLocation(req.location)
     ];
     if (req.category) {
-        matchersArray.push(doesIncludeBusinessFunction(req.category));
+        matchersArray.push(doesIncludeService(req.category));
     }
     if (req.requireWebsite) {
         matchersArray.push(doesHaveWebsite);
@@ -56,7 +111,14 @@ export const constructMatchersArray = (req) => {
     return matchersArray;
 };
 
-
+/**
+ * Takes in the array of all businesses in the DB and a supplied request object, then uses the other functions
+ * in this module to filter down the array of businesses and return a subset containing the businesses that met
+ * all parameters on the request object.
+ * @param {Array} allBusinesses - array of all businesses in the DB.
+ * @param {Object} req - the request object supplied.
+ * @returns {Array} - an array containing the subset of businesses that match all of the supplied parameters.
+ */
 const findAllMatchingBusinesses = (allBusinesses, req) => {
     const matchersArray = constructMatchersArray(req);
     return allBusinesses.filter((business) => {

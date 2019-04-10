@@ -5,27 +5,27 @@ import {
     locationData
 } from '../ResultsFilter/resultsData';
 import queryString from 'query-string';
-import db from '../../DB';
 import {
-    getAdditionalCategories,
     constructDBRequestObject,
     constructBreadcumbData,
     mergeState
 } from './utils';
+import { ResultsContext } from '../ResultsContext';
 
 export class ResultsRouteContainer extends Component {
 
+    static contextType = ResultsContext;
+
     state = {
         showingFilters: false,
-        isFetchingData: false,
-        results: [],
         service: this.props.currentSearchService || '',
         location: this.props.currentSearchLocation || '',
         category: null,
         contentrequirements: [],
         distance: null,
         locationrefinement: null,
-        sortby: 'relevance'
+        sortby: 'relevance',
+        offset: 0
     }
 
     /**
@@ -38,9 +38,9 @@ export class ResultsRouteContainer extends Component {
         if (this.props.location.search) {
             const parsedParams = queryString.parse(this.props.location.search);
             const filterState = mergeState(parsedParams);
-            this.setState({
+            this.setState(state => ({
                 ...filterState
-            }, this.makeDBRequest);
+            }), this.makeDBRequest);
         } else {
             this.makeDBRequest();
         }
@@ -69,42 +69,34 @@ export class ResultsRouteContainer extends Component {
         let filterState = mergeState(
             queryString.parse(this.props.location.search)
         );
-        this.setState({
+        console.log(filterState);
+        this.setState(state => ({
             ...formState,
             ...filterState
-        }, this.makeDBRequest);
+        }), this.makeDBRequest);
     }
 
     /**
      * Makes a call to the fake backend for new data, using the information from state to specify which data
      * to ask for.
      */
-    async makeDBRequest() {
+    makeDBRequest() {
         const {
             service,
             location,
             category,
             contentrequirements,
-            sortby
+            sortby, 
+            offset
         } = this.state;
-        const req = constructDBRequestObject(service, location, category, contentrequirements, sortby);
-        console.log(req);
-        this.setState({
-            isFetchingData: true
-        });
-        try {
-            const results = await db.getResults(req);
-            //const results = { businesses: [] };
-            console.log(getAdditionalCategories(results.businesses));
-            this.setState({
-                isFetchingData: false,
-                results: results.businesses
-            });
-            console.log(results);
-        } catch (err) {
-            console.log(err);
-        }
+        const req = constructDBRequestObject(service, location, category, contentrequirements, sortby, offset);
+        this.context.makeRequest(req);
+    }
 
+    updateOffset = (newOffset) => {
+        this.setState(state => ({
+            offset: newOffset
+        }), this.redirectURL)
     }
 
     /**
@@ -120,9 +112,9 @@ export class ResultsRouteContainer extends Component {
      * Updates the selected category field in state (radio button behaviour).
      */
     updateSelectedCategory = (newCategory) => {
-        this.setState({
+        this.setState(state => ({
             category: newCategory
-        }, this.redirectURL);
+        }), this.redirectURL);
     };
 
     /**
@@ -193,6 +185,7 @@ export class ResultsRouteContainer extends Component {
      * then redirects to that URL via the browser history API.
      */
     redirectURL = () => {
+        console.log('redirectURL was called');
         const {
             service,
             location,
@@ -200,12 +193,13 @@ export class ResultsRouteContainer extends Component {
             contentrequirements,
             distance,
             locationrefinement,
-            sortby
+            sortby,
+            offset
         } = this.state;
         let urlPath = `/results/${service}/${location}/`;
         let paramsArray = [];
         if (category !== null) {
-            paramsArray.push(`category=${category}`);
+            paramsArray.push(`category=${encodeURIComponent(category)}`);
         }
         if (contentrequirements.length) {
             paramsArray.push(`contentrequirements=${contentrequirements.join(',')}`);
@@ -218,6 +212,9 @@ export class ResultsRouteContainer extends Component {
         }
         if (sortby !== 'relevance') {
             paramsArray.push(`sortby=${sortby}`);
+        }
+        if (offset) {
+            paramsArray.push(`offset=${offset}`);
         }
         if (paramsArray.length) {
             const searchString = `?${paramsArray.join('&')}`;
@@ -235,25 +232,26 @@ export class ResultsRouteContainer extends Component {
     render() {
         const { 
             showingFilters,
-            isFetchingData,
-            results, 
             service, 
             location,
             category,
             contentrequirements,
             distance,
             locationrefinement,
-            sortby
+            sortby,
+            offset
         } = this.state;
         const { currentSearchService, currentSearchLocation } = this.props;
+        //const { isFetching, results } = this.context;
+        //const isFetching = this.context.isFetching;
+        //const results = [];
+
         const updateDistanceFilter = this.updateLocationFilters('distance', 'locationrefinement');
         const updateLocationRefinement = this.updateLocationFilters('locationrefinement', 'distance');
-        const categoryData = getAdditionalCategories(results);
-        const breadcrumbsData = constructBreadcumbData(location, service);
+        //const categoryData = getAdditionalCategories(results);
+        const breadcrumbsData = constructBreadcumbData(currentSearchLocation, currentSearchService);
 
         return <ResultsRoute 
-            isFetchingData={isFetchingData}
-            results={results}
             serviceFieldValue={service}
             locationFieldValue={location}
             updateServiceFormField={this.updateServiceFormField}
@@ -265,7 +263,6 @@ export class ResultsRouteContainer extends Component {
             currentSearchLocation={currentSearchLocation}
             sortCriteria={sortby}
             updateSortCriteria={this.updateSortCriteria}
-            categoryData={categoryData}
             locationData={locationData}
             selectedCategory={category}
             selectedContentRequirements={contentrequirements}
@@ -276,6 +273,8 @@ export class ResultsRouteContainer extends Component {
             updateDistanceFilter={updateDistanceFilter}
             updateLocationRefinement={updateLocationRefinement}
             redirectURL={this.redirectURL}
+            offset={offset}
+            updateOffset={this.updateOffset}
         />
     }
 }

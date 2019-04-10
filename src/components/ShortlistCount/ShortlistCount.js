@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ShortlistContext } from '../ShortlistContext';
 import {
-    StyledShortlistCount,
-    StyledShortlistCountWithItems,
+    ShortlistCountContainer,
+    ShortlistCountLink,
     ShortlistNumber
 } from './elements';
 
@@ -15,14 +15,16 @@ export class ShortlistCount extends Component {
         const { shortlist } = this.context;
         const shortlistCount = shortlist.length;
         return shortlistCount > 0 ? (
-            <StyledShortlistCountWithItems to="/shortlist">
-                Shortlist
-                <ShortlistNumber>{shortlistCount}</ShortlistNumber>
-            </StyledShortlistCountWithItems>
+            <ShortlistCountContainer>
+                <ShortlistCountLink to="/shortlist">
+                    <p>Shortlist</p>
+                    <ShortlistNumber>{shortlistCount}</ShortlistNumber>
+                </ShortlistCountLink>
+            </ShortlistCountContainer>
         ) : (
-            <StyledShortlistCount to="/shortlist">
-                Shortlist (0)
-            </StyledShortlistCount>
+            <ShortlistCountContainer>
+                <p>Shortlist (0)</p>
+            </ShortlistCountContainer>
         )
     }
 }

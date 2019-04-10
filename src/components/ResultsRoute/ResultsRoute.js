@@ -20,7 +20,6 @@ import {
     ResultsHeaderButton,
     ResultsHeaderButtonIcon
 } from './elements';
-import Loader from '../Loader';
 import ShortlistCount from '../ShortlistCount';
 import ShortlistSummary from '../ShortlistSummary';
 import { 
@@ -29,91 +28,98 @@ import {
     SplitLayoutAside,
     SplitLayoutBody
 } from '../LayoutElements';
+import { ResultsContextConsumer } from '../ResultsContext';
+import ResultsCollection from './ResultsCollection';
 
+const formatSelectedCategory = (selectedCategory) => ([{
+    id: selectedCategory.toLowerCase().replace(/ /g, ''),
+    text: selectedCategory.toLowerCase()
+}])
 
 export const ResultsRoute = (props) => (
-    <SplitLayoutBody>
-        <Header>
-            <HeaderContentContainer>
-                <Logo as="a" href="/" />
-                <SearchForm 
-                    serviceFieldValue={props.serviceFieldValue}
-                    locationFieldValue={props.locationFieldValue}
-                    handleServiceFieldUpdate={props.updateServiceFormField}
-                    handleLocationFieldUpdate={props.updateLocationFormField}
-                    handleFormSubmit={props.redirectURL}
-                    isSelfControlled={false}
-                />
-                <ShortlistCount />
-                <LoginLink />
-            </HeaderContentContainer>
-        </Header>
-        <BreadcrumbsRow>
-            <Breadcrumbs breadcrumbsArray={props.breadcrumbsArray} />
-            <SocialShareLinksContainer>
-                <SocialShareLink platform="facebook" />
-                <SocialShareLink platform="twitter" />
-            </SocialShareLinksContainer>
-        </BreadcrumbsRow>
-        <ResultsHeaderRow>
-            <ResultsSummary>
-                <span>{props.currentSearchService}</span> in <span>{props.currentSearchLocation}</span>
-            </ResultsSummary>
-            <ResultsHeaderButton isActive={props.showingFilters} onClick={props.toggleFilters}>
-                {props.showingFilters ? (
-                        <>
-                            <ResultsHeaderButtonIcon icon={faAngleLeft} />
-                            Close Filters
-                        </>     
-                ) : (
-                        <>
-                            <ResultsHeaderButtonIcon icon={faSlidersH} />
-                            Filters
-                        </>
-                )}
-            </ResultsHeaderButton>
-            <ResultsHeaderButton as="a" href="#">
-                <ResultsHeaderButtonIcon icon={faMapMarkerAlt} />
-                View map
-            </ResultsHeaderButton>
-            <SortBy 
-                sortCriteria={props.sortCriteria}
-                updateSortCriteria={props.updateSortCriteria}
-            />
-        </ResultsHeaderRow>
-        <SplitLayoutContainer>
-            <SplitLayoutAside showAside={props.showingFilters}>
-                <MapPod />
-                <ResultsFilter 
-                    categoryData={props.categoryData}
-                    locationData={props.locationData}
-                    selectedCategory={props.selectedCategory}
-                    selectedContentRequirements={props.selectedContentRequirements}
-                    distanceFilter={props.distanceFilter}
-                    locationRefinement={props.locationRefinement}
-                    updateSelectedCategory={props.updateSelectedCategory}
-                    updateContentRequirements={props.updateContentRequirements}
-                    updateDistanceFilter={props.updateDistanceFilter}
-                    updateLocationRefinement={props.updateLocationRefinement}
-                /> 
-                <ShortlistSummary />
-            </SplitLayoutAside>
-            <SplitLayoutMain>
-                {props.isFetchingData ? (
-                    <Loader />
-                ) : (
-                    props.results.map(business => (
-                        <BusinessCard business={business} key={business.id} />
-                    ))
-                )}
-            </SplitLayoutMain>
-        </SplitLayoutContainer>
-    </SplitLayoutBody>
+    <ResultsContextConsumer>
+        {({ additionalCategories }) => (
+            <SplitLayoutBody>
+                <Header>
+                    <HeaderContentContainer>
+                        <Logo as="a" href="/" />
+                        <SearchForm 
+                            serviceFieldValue={props.serviceFieldValue}
+                            locationFieldValue={props.locationFieldValue}
+                            handleServiceFieldUpdate={props.updateServiceFormField}
+                            handleLocationFieldUpdate={props.updateLocationFormField}
+                            handleFormSubmit={props.redirectURL}
+                        />
+                        <ShortlistCount />
+                        <LoginLink />
+                    </HeaderContentContainer>
+                </Header>
+                <BreadcrumbsRow>
+                    <Breadcrumbs breadcrumbsArray={props.breadcrumbsArray} />
+                    <SocialShareLinksContainer>
+                        <SocialShareLink platform="facebook" />
+                        <SocialShareLink platform="twitter" />
+                    </SocialShareLinksContainer>
+                </BreadcrumbsRow>
+                <ResultsHeaderRow>
+                    <ResultsSummary>
+                        <span>{props.currentSearchService}</span> in <span>{props.currentSearchLocation}</span>
+                    </ResultsSummary>
+                    <ResultsHeaderButton isActive={props.showingFilters} onClick={props.toggleFilters}>
+                        {props.showingFilters ? (
+                                <>
+                                    <ResultsHeaderButtonIcon icon={faAngleLeft} />
+                                    Close Filters
+                                </>     
+                        ) : (
+                                <>
+                                    <ResultsHeaderButtonIcon icon={faSlidersH} />
+                                    Filters
+                                </>
+                        )}
+                    </ResultsHeaderButton>
+                    <ResultsHeaderButton as="a" href="#">
+                        <ResultsHeaderButtonIcon icon={faMapMarkerAlt} />
+                        View map
+                    </ResultsHeaderButton>
+                    <SortBy 
+                        sortCriteria={props.sortCriteria}
+                        updateSortCriteria={props.updateSortCriteria}
+                    />
+                </ResultsHeaderRow>
+                <SplitLayoutContainer>
+                    <SplitLayoutAside showAside={props.showingFilters}>
+                        <MapPod />
+                        <ResultsFilter 
+                            categoryData={props.selectedCategory === null ? 
+                                            additionalCategories : 
+                                            formatSelectedCategory(props.selectedCategory)
+                                        }
+                            locationData={props.locationData}
+                            selectedCategory={props.selectedCategory}
+                            selectedContentRequirements={props.selectedContentRequirements}
+                            distanceFilter={props.distanceFilter}
+                            locationRefinement={props.locationRefinement}
+                            updateSelectedCategory={props.updateSelectedCategory}
+                            updateContentRequirements={props.updateContentRequirements}
+                            updateDistanceFilter={props.updateDistanceFilter}
+                            updateLocationRefinement={props.updateLocationRefinement}
+                        /> 
+                        <ShortlistSummary />
+                    </SplitLayoutAside>
+                    <SplitLayoutMain>
+                        <ResultsCollection 
+                            offset={props.offset}
+                            updateOffset={props.updateOffset}
+                        />
+                    </SplitLayoutMain>
+                </SplitLayoutContainer>
+            </SplitLayoutBody>
+        )}
+    </ResultsContextConsumer>
 );
 
 ResultsRoute.propTypes = {
-    isFetchingData: PropTypes.bool.isRequired,
-    results: PropTypes.arrayOf(PropTypes.object).isRequired,
     serviceFieldValue: PropTypes.string,
     locationFieldValue: PropTypes.string,
     updateServiceFormField: PropTypes.func.isRequired,
@@ -125,7 +131,7 @@ ResultsRoute.propTypes = {
     currentSearchLocation: PropTypes.string,
     sortCriteria: PropTypes.string.isRequired,
     updateSortCriteria: PropTypes.func.isRequired,
-    categoryData: PropTypes.arrayOf(PropTypes.object).isRequired,
+    //categoryData: PropTypes.arrayOf(PropTypes.object).isRequired,
     locationData: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectedCategory: PropTypes.string,
     selectedContentRequirements: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -136,3 +142,18 @@ ResultsRoute.propTypes = {
     updateDistanceFilter: PropTypes.func.isRequired,
     updateLocationRefinement: PropTypes.func.isRequired
 };
+
+
+
+
+/*
+
+{isFetching ? (
+                            <Loader />
+                        ) : (
+                            results.map(business => (
+                                <BusinessCard business={business} key={business.id} />
+                            ))
+                        )}
+
+*/

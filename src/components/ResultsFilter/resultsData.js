@@ -42,83 +42,27 @@ export const distanceData = [
 
 export const locationData = [
     {
-        id: 'baillieston',
-        text: 'baillieston'
+        id: 'locationone',
+        text: 'location one'
     },
     {
-        id: 'balfron',
-        text: 'balfron'
+        id: 'locationtwo',
+        text: 'location two'
     },
     {
-        id: 'balfron_station',
-        text: 'balfron station'
+        id: 'locationthree',
+        text: 'location three'
     },
     {
-        id: 'balmaha',
-        text: 'balmaha'
+        id: 'locationfour',
+        text: 'location four'
     },
     {
-        id: 'barrhead',
-        text: 'barrhead'
+        id: 'locationfive',
+        text: 'location five'
     },
     {
-        id: 'bearsden',
-        text: 'bearsden'
-    },
-    {
-        id: 'bishopbriggs',
-        text: 'bishopbriggs'
-    },
-    {
-        id: 'blanefield',
-        text: 'blanefield'
-    },
-    {
-        id: 'blantyre',
-        text: 'blantyre'
-    },
-    {
-        id: 'bothwell',
-        text: 'bothwell'
-    },
-    {
-        id: 'bowling',
-        text: 'bowling'
-    },
-    {
-        id: 'cambuslang',
-        text: 'cambuslang'
-    },
-    {
-        id: 'campsie_glen',
-        text: 'campsie glen'
-    },
-    {
-        id: 'carmyle',
-        text: 'carmyle'
-    },
-    {
-        id: 'chryston',
-        text: 'chryston'
-    },
-    {
-        id: 'clarkston',
-        text: 'clarkston'
-    },
-    {
-        id: 'clydesmill_industrial_estate',
-        text: 'clydesmill industrial estate'
-    },
-    {
-        id: 'cowlairs_industrial_estate',
-        text: 'cowlairs industrial estate'
-    },
-    {
-        id: 'croftamie',
-        text: 'croftamie'
-    },
-    {
-        id: 'cumbernauld',
-        text: 'cumbernauld'
+        id: 'locationsix',
+        text: 'location six'
     }
 ];

@@ -27,6 +27,10 @@ export class ShortlistContextProvider extends Component {
      * @param {Object} businessObject - the business object to add to the shortlist.
      */
     addBusiness = (businessObject) => {
+        if (this.state.shortlist.length >= 10) {
+            console.error('The shortlist can only hold up to 10 businesses at a time.');
+            return;
+        }
         this.setState(state => ({
             shortlist: [ ...state.shortlist, businessObject ]
         }));

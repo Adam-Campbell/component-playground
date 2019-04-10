@@ -1,53 +1,45 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-//import { servicesWithCache, locationsWithCache } from '../../utils';
 import { servicesAutoCompleteCache, locationsAutoCompleteCache } from '../../AutoCompleteCaches';
-import { withRouter } from 'react-router-dom';
-
 
 /*
-___________________________________________________________
- About the isSelfControlled prop and associated behaviours
-___________________________________________________________
 
-Depending on whether the isSelfControlled prop is true or false, this component will either completely
-control itself (when the prop is true), or will delegate control to its parent component (when the prop is 
-false). 
+This component manages the autocomplete suggestion functionality, active states and error states for the 
+service and location fields of the forms that are used in multiple places throughout the site. This component
+does not render anything by itself, instead it utilises the render prop pattern to allow a child component to
+control exactly what gets rendered. 
 
-When it delegates control to its parent, it must receive the fields values as props, as well as onChange
-handles for each field and an onSubmit handler for the form. 
+It also does not manage the actual values of the fields, or what happens when the form is submitted, instead
+relying on props passed down from the parent component to manage these things. This is done for additional
+flexibility, making this component equally easy to use whether these two fields constitute the entire form
+on the current page, or whether these fields only constitute part of a much larger form (such as the results
+page).
 
-These two behaviours allow the component to be used both in contexts where it is the complete 'form' on that
-page, such as the home page, as well as in contexts where it is only part of a larger form, such as the results
-page.
+The intended usage looks like this:
 
-Note that in its current implementation everything still has to pass through the local component state even when
-the component is controlled by its parent, so the flow is:
+- Parent component renders this component, passing down as props the current field values, callback functions 
+to update those values, and a callback function to handle form submission.
 
-parents state => passed down as props => this components state => passed to input element
+- This component accepts those props, performs logic to handle the autocomplete suggestions, manage active
+states for each field and derive whether any of the fields are currently in an error state. All of this
+new information, along with the props passed to this component, are then passed down to the render prop
+child component.
 
-This is not optimal, but it is unlikely to have any tangible performance impact. However, it would be good to
-come up with a better way to deal with this. 
+- The child component receives all of these props, and is free to render and display the infomration however it 
+needs to. The only contract it has with this component is that the various callback functions have to be attached 
+to DOM elements so that they actually get called and the state can ultimately update.
 
 */
-
 
 export class SearchFormStateContainer extends Component {
 
     static propTypes = {
-        serviceFieldValue: PropTypes.string,
-        locationFieldValue: PropTypes.string,
-        handleServiceFieldUpdate: PropTypes.func,
-        handleLocationFieldUpdate: PropTypes.func,
-        handleFormSubmit: PropTypes.func,
-        isSelfControlled: PropTypes.bool
+        serviceFieldValue: PropTypes.string.isRequired,
+        locationFieldValue: PropTypes.string.isRequired,
+        handleServiceFieldUpdate: PropTypes.func.isRequired,
+        handleLocationFieldUpdate: PropTypes.func.isRequired,
+        handleFormSubmit: PropTypes.func.isRequired
     };
-
-    static defaultProps = {
-        serviceFieldValue: '',
-        locationFieldValue: '',
-        isSelfControlled: false
-    }
 
     state = {
         serviceFieldValue: this.props.serviceFieldValue,
@@ -63,18 +55,11 @@ export class SearchFormStateContainer extends Component {
     servicesAutoCompleteCache = servicesAutoCompleteCache;
     locationsAutoCompleteCache = locationsAutoCompleteCache;
 
-    componentDidUpdate(prevProps) {
-        if (
-            prevProps.serviceFieldValue !== this.props.serviceFieldValue ||
-            prevProps.locationFieldValue !== this.props.locationFieldValue
-        ) {
-            this.setState({
-                serviceFieldValue: this.props.serviceFieldValue,
-                locationFieldValue: this.props.locationFieldValue
-            });
-        }
-    }
-
+    /**
+     * Gets autocomplete suggestion data for the current value in the service field and stores the data
+     * in state.
+     * @param {String} query - the current value of the service field. 
+     */
     updateServiceSuggestions = async (query) => {
         let newSuggestions = [];
         if (query !== '') {
@@ -86,6 +71,11 @@ export class SearchFormStateContainer extends Component {
         });
     };
 
+    /**
+     * Gets autocomplete suggestion data for the current value in the service field and stores the data
+     * in state.
+     * @param {String} query - the current value of the location field. 
+     */
     updateLocationSuggestions = async (query) => {
         let newSuggestions = [];
         if (query !== '') {
@@ -97,27 +87,35 @@ export class SearchFormStateContainer extends Component {
         });
     };
 
+    /**
+     * Updates the active status of the service field. 
+     * @param {Boolean} isActive - whether or not the field should be in an active state.
+     */
     updateServiceFieldActiveStatus = (isActive) => {
         this.setState({
             serviceFieldActive: isActive
         });
     };
 
+    /**
+     * Updates the active status of the location field. 
+     * @param {Boolean} isActive - whether or not the field should be in an active state.
+     */
     updateLocationFieldActiveStatus = (isActive) => {
         this.setState({
             locationFieldActive: isActive
         });
     };
 
+    /**
+     * Update the service field via the callback supplied by parent component, mark the field as unfresh if 
+     * it isn't already, and fetch autocomplete suggestions for the new field value.
+     * @param {String} value - the new value for the service field.
+     */
     updateServiceField = (value) => {
-        console.log('initial call: ', Date.now());
-        if (this.props.isSelfControlled) {
-            this.setState({
-                serviceFieldValue: value,
-                serviceFieldIsFresh: false
-            });
-        } else {
-            this.props.handleServiceFieldUpdate(value);
+        const { serviceFieldIsFresh } = this.state;
+        this.props.handleServiceFieldUpdate(value);
+        if (serviceFieldIsFresh) {
             this.setState({
                 serviceFieldIsFresh: false
             });
@@ -125,14 +123,15 @@ export class SearchFormStateContainer extends Component {
         this.updateServiceSuggestions(value);
     };
 
+    /**
+     * Update the location field via the callback supplied by parent component, mark the field as unfresh if 
+     * it isn't already, and fetch autocomplete suggestions for the new field value.
+     * @param {String} value - the new value for the location field.
+     */
     updateLocationField = (value) => {
-        if (this.props.isSelfControlled) {
-            this.setState({
-                locationFieldValue: value,
-                locationFieldIsFresh: false
-            });
-        } else {
-            this.props.handleLocationFieldUpdate(value);
+        const { locationFieldIsFresh } = this.state;
+        this.props.handleLocationFieldUpdate(value);
+        if (locationFieldIsFresh) {
             this.setState({
                 locationFieldIsFresh: false
             });
@@ -140,23 +139,23 @@ export class SearchFormStateContainer extends Component {
         this.updateLocationSuggestions(value);
     };
 
+    /**
+     * Prevent default to stop the browser from attempting to submit the form. Then, if both fields have a
+     * value, call the handleFormSubmit callback supplied by parent component. Finally, if either of the 
+     * form fields are still marked as fresh, ensure they are now marked as unfresh. 
+     */
     handleFormSubmit = (e) => {
         e.preventDefault();
         const { 
             serviceFieldIsFresh, 
-            locationFieldIsFresh,
-            serviceFieldValue,
-            locationFieldValue 
+            locationFieldIsFresh
         } = this.state;
+        const { 
+            serviceFieldValue, 
+            locationFieldValue 
+        } = this.props;
         if (serviceFieldValue && locationFieldValue) {
-            console.log(this.props.isSelfControlled);
-            if (this.props.isSelfControlled) {
-                this.props.history.push({
-                    pathname: `/results/${serviceFieldValue}/${locationFieldValue}`
-                });
-            } else {
-                this.props.handleFormSubmit();
-            }
+            this.props.handleFormSubmit();
         }
         if (serviceFieldIsFresh || locationFieldIsFresh) {
             this.setState({
@@ -167,18 +166,22 @@ export class SearchFormStateContainer extends Component {
     }
 
     render() {
-        const { children } = this.props;
         const {
             serviceFieldValue,
+            locationFieldValue, 
+            children 
+        } = this.props;
+        const {
             serviceFieldActive, 
             serviceFieldSuggestions,
             serviceFieldIsFresh,
-            locationFieldValue,
             locationFieldActive,
             locationFieldSuggestions,
             locationFieldIsFresh
         } = this.state;
 
+        // A field is considered to have an error when it is empty (equal to an empty string), is not currently
+        // in its active state and is no longer considered fresh (it has been altered at least once).
         const serviceFieldHasError = serviceFieldValue === '' && !serviceFieldActive && !serviceFieldIsFresh;
         const locationFieldHasError = locationFieldValue === '' && !locationFieldActive && !locationFieldIsFresh;
 

@@ -86,10 +86,12 @@ export class Drawer extends Component {
                                         checked={selectionState === option.text}
                                         onClick={() => {
                                             if (selectionState === option.text) {
-                                                this.props.handleChange(null);
+                                                handleChange(null);
                                             }
                                         }}
-                                        onChange={() => handleChange(option.text)}   
+                                        onChange={() => {
+                                            handleChange(option.text)
+                                        }}   
                                     />
                                     <InputLabel htmlFor={option.id} capitalize={shouldCapitalize}>
                                         {option.text}

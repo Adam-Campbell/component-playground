@@ -15,7 +15,6 @@ export const ResultsSearchForm = (props) => (
     <SearchFormStateContainer
         serviceFieldValue={props.serviceFieldValue}
         locationFieldValue={props.locationFieldValue}
-        isSelfControlled={props.isSelfControlled}
         handleServiceFieldUpdate={props.handleServiceFieldUpdate}
         handleLocationFieldUpdate={props.handleLocationFieldUpdate}
         handleFormSubmit={props.handleFormSubmit}
@@ -70,11 +69,10 @@ export const ResultsSearchForm = (props) => (
 );
 
 ResultsSearchForm.propTypes = {
-    serviceFieldValue: PropTypes.string,
-    locationFieldValue: PropTypes.string,
-    isSelfControlled: PropTypes.bool,
-    handleServiceFieldUpdate: PropTypes.func,
-    handleLocationFieldUpdate: PropTypes.func,
-    handleFormSubmit: PropTypes.func
+    serviceFieldValue: PropTypes.string.isRequired,
+    locationFieldValue: PropTypes.string.isRequired,
+    handleServiceFieldUpdate: PropTypes.func.isRequired,
+    handleLocationFieldUpdate: PropTypes.func.isRequired,
+    handleFormSubmit: PropTypes.func.isRequired
 };
 

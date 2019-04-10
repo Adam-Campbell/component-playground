@@ -18,6 +18,7 @@ export const SplitLayoutBody = styled.div`
 
 export const SplitLayoutContainer = styled(Row)`
     display: flex;
+    margin-bottom: 40px;
 `;
 
 export const SplitLayoutMain = styled.main`

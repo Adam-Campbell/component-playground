@@ -18,9 +18,7 @@ export const BusinessName = styled.h1`
     font-weight: 700;
     color: #222;
     text-decoration: none;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 10px;
+    margin: 5px 10px;
 `;
 
 export const LinkWrapper = styled(Link)`
@@ -40,6 +38,7 @@ export const LoyaltyBanner = styled.div`
     padding-left: 10px;
     position: relative;
     height: 35px;
+    flex-shrink: 0;
     &:after {
         content: ' ';
         display: block;

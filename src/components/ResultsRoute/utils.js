@@ -8,11 +8,12 @@ export const getAdditionalCategories = (resultsArr, currentCategoryState) => {
     return transformedToObjects;
 };
 
-export const constructDBRequestObject = (service, location, category, contentrequirements, sortby) => {
+export const constructDBRequestObject = (service, location, category, contentrequirements, sortby, offset) => {
     const req = {
         businessFunction: service,
         location,
-        sortby
+        sortby,
+        offset
     };
     if (category) req.category = category;
     if (contentrequirements.includes('websites')) req.requireWebsite = true;
@@ -49,6 +50,7 @@ const defaultFilterState = {
 export const mergeState = (newState) => ({
     ...defaultFilterState,
     ...newState,
+    offset: newState.offset ? parseInt(newState.offset) : 0,
     contentrequirements: newState.contentrequirements && newState.contentrequirements.length ?
                          newState.contentrequirements.split(',') :
                          []

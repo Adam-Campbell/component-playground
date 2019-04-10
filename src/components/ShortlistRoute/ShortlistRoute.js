@@ -99,7 +99,6 @@ export class ShortlistRoute extends Component {
                             handleServiceFieldUpdate={this.updateServiceField}
                             handleLocationFieldUpdate={this.updateLocationField}
                             handleFormSubmit={this.redirectURL}
-                            isSelfControlled={false}
                         />
                         <ShortlistCount />
                         <LoginLink />

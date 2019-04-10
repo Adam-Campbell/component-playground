@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import styled from 'styled-components';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import HomeRoute from './components/HomeRoute';
 import ResultsRoute from './components/ResultsRoute';
 import ShortlistRoute from './components/ShortlistRoute';
-import db from './DB';
-
-window.db = db;
 
 class App extends Component {
   render() {
@@ -33,33 +27,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-
-
-/*
-
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Header>
-          <YellLogoFull src={YellLogo} alt="The Yell logo" />
-          <LoginLink href="#">
-            <FontAwesomeIcon icon={faUserCircle} />
-            Log in
-            <FontAwesomeIcon icon={faAngleRight} />
-          </LoginLink>
-        </Header>
-        <main className="app-main">
-          <BusinessCard businessId="a1" />
-          <BusinessCard businessId="b2" />
-        </main>
-      </div>
-    );
-  }
-}
-
-
-
-*/

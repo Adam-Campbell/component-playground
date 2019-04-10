@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { ShortlistContextProvider } from './components/ShortlistContext'
+import { ShortlistContextProvider } from './components/ShortlistContext';
+import { ResultsContextProvider } from './components/ResultsContext';
 
 ReactDOM.render(
-    <ShortlistContextProvider>
-        <App />
-    </ShortlistContextProvider>, 
+    <ResultsContextProvider>
+        <ShortlistContextProvider>
+            <App />
+        </ShortlistContextProvider>
+    </ResultsContextProvider>, 
     document.getElementById('root')
 );
 

@@ -1,9 +1,11 @@
 import { 
     locations,
     services,
+    services2d,
     TLDs,
     emailPrefixes,
-    areaCodes
+    areaCodes,
+    profileImages
 } from './data';
 import BusinessNameGenerator from './BusinessNameGenerator';
 import AddressGenerator from './AddressGenerator';
@@ -19,18 +21,19 @@ export class BusinessGenerator extends DataGenerator {
     constructor() {
         super();
   	    this.locations = locations;
-        this.services = services;
+        this.services2d = services2d;
         this.TLDs = TLDs;
         this.emailPrefixes = emailPrefixes;
-        this.areaCodes = areaCodes
+        this.areaCodes = areaCodes;
+        this.profileImages = profileImages;
         this.businessNameFactory = new BusinessNameGenerator();
         this.addressFactory = new AddressGenerator();
         this.reviewFactory = new ReviewGenerator();
     }
 
     /**
-     * This method has a 0.8 probability of creating a web address, else it returns null. If a web address is 
-     * created, it is based off of the given business name plus a random TLD.
+     * This method has a 0.8 probability of creating a web address, else it returns null. If a web address isLongTermCustomer 
+     * created, it isLongTermCustomer based off of the given business name plus a random TLD.
      * @param {String} businessName - the name of the business.
      * @returns {?String} - either the created string, or null.
      */
@@ -47,7 +50,7 @@ export class BusinessGenerator extends DataGenerator {
     }
 
     /**
-     * This method will always return null if the web address is also null. If the web address is not null,
+     * This method will always return null if the web address isLongTermCustomer also null. If the web address isLongTermCustomer not null,
      * it has 0.7 probability of creating an email address, which will be based off of the given web address
      * plus a random prefix. 
      * @param {?String} webAddress - the web address to construct the email address from. 
@@ -88,6 +91,14 @@ export class BusinessGenerator extends DataGenerator {
         const trimmed = Math.round(untrimmed * 10) / 10;
         return trimmed;
     }
+
+    getRandomServices() {
+        const row = this.getRandomNumFromRange(0, this.services2d.length - 1);
+        return this.getManyRandomArrayElements(
+            this.services2d[row],
+            this.getRandomNumFromRange(1, 3)
+        );
+    }
   
     /**
      * Utilises the other class methods to construct and return a business object.
@@ -96,10 +107,11 @@ export class BusinessGenerator extends DataGenerator {
     constructBusiness() {
         const id = this.generateRandomId();
         const location = this.addressFactory.constructAddress();
-        const services = this.getManyRandomArrayElements(
-            this.services, 
-            this.getRandomNumFromRange(1,3)
-        );
+        // const services = this.getManyRandomArrayElements(
+        //     this.services, 
+        //     this.getRandomNumFromRange(1,3)
+        // );
+        const services = this.getRandomServices();
         const businessName = this.businessNameFactory.constructBusinessName(services[0]);
         const website = this.getRandomWebsite(businessName);
         const email = this.getRandomEmailAddress(website);
@@ -112,6 +124,8 @@ export class BusinessGenerator extends DataGenerator {
         const photos = this.probabilityGate(0.6) ? [] : null;
         const videos = this.probabilityGate(0.4);
         const messaging = this.probabilityGate(0.4);
+        const isLongTermCustomer = this.probabilityGate(0.2);
+        const profileImage = this.getRandomArrayElement(this.profileImages);
         const business = {
             id,
             name: businessName,
@@ -125,7 +139,9 @@ export class BusinessGenerator extends DataGenerator {
             telephoneNumber,
             photos,
             videos,
-            messaging
+            messaging,
+            isLongTermCustomer,
+            profileImage
         };
         return business;
     }

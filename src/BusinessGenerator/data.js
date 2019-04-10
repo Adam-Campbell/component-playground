@@ -1,7 +1,37 @@
 import { popularLocations, popularServices } from '../data';
+import ProfileOne from '../images/profile-one.jpg';
+import ProfileTwo from '../images/profile-two.jpg';
+import ProfileThree from '../images/profile-three.jpg';
+import ProfileFour from '../images/profile-four.jpg';
+import ProfileFive from '../images/profile-five.jpg';
+import ProfileSix from '../images/profile-six.jpg';
+import ProfileSeven from '../images/profile-seven.jpg';
 
 export const locations = popularLocations;
 export const services = popularServices;
+
+export const profileImages = [
+    ProfileOne,
+    ProfileTwo,
+    ProfileThree,
+    ProfileFour,
+    ProfileFive,
+    ProfileSix,
+    ProfileSeven
+];
+
+export const services2d = [
+    ['Accountants', 'Bookkeeping Services', 'Tax Advisers'],
+    ['Cafes & Coffee Shops', 'Conference Facilities & Services', 'Tea & Coffee Specialist Shops'],
+    ['Dentists', 'Root Canal Treatment', 'Dental Implants'],
+    ['Electricians', 'Electrical Inspecting & Testing', 'Emergency Electricians'],
+    ['Garage Services', 'MOT Testing', 'Car Body Repairs'],
+    ['Hairdressers', 'Barbers', 'Mobile Hairdressers'],
+    ['Newsagents', 'Newspapers & Magazines', 'Grocers & Convenience Stores'],
+    ['Pubs', 'Pub Restaurants', 'Bars & Wine Bars'],
+    ['Solicitors', 'Legal Services', 'Family Law'],
+    ['Taxis & Private Hire Vehicles', 'Mini Cabs', 'Airport Transfers']
+];
 
 export const surnames = [
     'Smith',

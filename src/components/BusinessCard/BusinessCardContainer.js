@@ -1,7 +1,6 @@
 import React from 'react';
 import { BusinessCard } from './BusinessCard';
 import PropTypes from 'prop-types';
-import SartiProfileImage from '../../images/sarti-profile.webp';
 
 const mainServices = [
     'Main service one',
@@ -15,12 +14,12 @@ const mainServices = [
 export const BusinessCardContainer = ({ business }) => (
     <BusinessCard 
         id={business.id}
-        profileImage={SartiProfileImage}
+        profileImage={business.profileImage}
         name={business.name}
         phone={business.telephoneNumber}
         email={business.email}
         url={business.website}
-        isLongTermCustomer={false}
+        isLongTermCustomer={business.isLongTermCustomer}
         categories={business.services}
         address={`${business.location.streetAddress} ${business.location.city} ${business.location.postcode}`}
         mainServices={mainServices}

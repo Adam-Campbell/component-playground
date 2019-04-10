@@ -14,7 +14,9 @@ export const HomeSearchForm = (props) => (
     <SearchFormStateContainer
         serviceFieldValue={props.serviceFieldValue}
         locationFieldValue={props.locationFieldValue}
-        isSelfControlled={true}
+        handleServiceFieldUpdate={props.handleServiceFieldUpdate}
+        handleLocationFieldUpdate={props.handleLocationFieldUpdate}
+        handleFormSubmit={props.handleFormSubmit}
     >
         {({
             serviceFieldValue,
@@ -63,6 +65,9 @@ export const HomeSearchForm = (props) => (
 );
 
 HomeSearchForm.propTypes = {
-    serviceFieldValue: PropTypes.string,
-    locationFieldValue: PropTypes.string
+    serviceFieldValue: PropTypes.string.isRequired,
+    locationFieldValue: PropTypes.string.isRequired,
+    handleServiceFieldUpdate: PropTypes.func.isRequired,
+    handleLocationFieldUpdate: PropTypes.func.isRequired,
+    handleFormSubmit: PropTypes.func.isRequired
 };

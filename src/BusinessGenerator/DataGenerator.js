@@ -19,7 +19,7 @@ class Datagen {
      * @returns {Any} - the chosen element from the array.
      */
     getRandomArrayElement(array) {
-        const randomIndex = Math.round(Math.random() * (array.length - 1));
+        const randomIndex = Math.floor(Math.random() * array.length);
         return array[randomIndex];
     }
 

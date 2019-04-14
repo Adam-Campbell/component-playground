@@ -21,7 +21,7 @@ export const SplitLayoutContainer = styled(Row)`
     margin-bottom: 40px;
 `;
 
-export const SplitLayoutMain = styled.main`
+export const SplitLayoutMain = styled.div`
     position: relative;
     width: 748px;
     flex-shrink: 0;
@@ -35,13 +35,13 @@ export const SplitLayoutMain = styled.main`
 `;
 
 export const SplitLayoutAside = styled.aside`
-    display: ${({ showAside }) => showAside ? 'initial' : 'none'};
+    display: ${({ showAside }) => showAside ? 'block' : 'none'};
     width: 260px;
     flex-shrink: 0;
     min-height: 400px;
     padding-right: 30px;
     @media (min-width: 960px) {
-        display: initial;
+        display: block;
     }
     @media (min-width: 1250px) {
         width: 340px;

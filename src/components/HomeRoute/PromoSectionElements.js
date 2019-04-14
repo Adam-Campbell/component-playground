@@ -48,6 +48,7 @@ export const PodDescriptionText = styled.p`
 	font-size: 1.1rem;
 	margin-top: 10px
 	margin-bottom: 10px;
+	max-width: 100%;
 	${props => props.shouldHide && `
 		@media (max-width: 960px) {
 			display: none;
@@ -111,7 +112,8 @@ export const AppPodContentContainer = styled.div`
 `;
 
 export const AppPodDescriptionText = styled(PodDescriptionText)`
-    font-weight: 700;
+	font-weight: 700;
+	max-width: 100%;
 `;
 
 export const AppStoreLink = styled(SpriteSheet)`

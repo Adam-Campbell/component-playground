@@ -42,7 +42,7 @@ export const SubmitButton = styled.button`
     @media (min-width: 960px) {
         padding: 10px 50px;
         span {
-            display: initial;
+            display: inline-block;
         }
         .fa-search {
             display: none;

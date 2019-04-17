@@ -1,6 +1,6 @@
 # Yell Clone
 
-A partial clone of Yell.com, with only few views and a small subset of the features covered. This project originally started out as a simple exercise to mimic the form functionality found on the homepage for my own practice, but has grown slightly since then. 
+A partial clone of Yell.com, with only a few views and a small subset of the features covered. This project originally started out as a simple exercise to mimic the form functionality found on the homepage for my own practice, but has grown slightly since then. 
 
 Views covered include the Home page, results page and shortlist page. Businesses can be searched for, (a number of random business profiles are constructed when the app initializes, see the links below for more details) and the results can be then be filtered or sorted, and will be also be paginated if there are enough results. Businesses can also be added to and removed from the shortlist. 
 

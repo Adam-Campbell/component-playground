@@ -23,13 +23,13 @@ export const StandardLink = styled(Link)`
         margin-left: 40px;
         display: none;
         @media (min-width: 960px) {
-            display: initial;
+            display: block;
         }
     }
     span {
         display: none;
         @media (min-width: 960px) {
-            display: initial;
+            display: inline-block;
         }
     }
 `;

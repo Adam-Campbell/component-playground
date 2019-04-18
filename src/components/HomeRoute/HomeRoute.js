@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from '../Header';
-import YellLogo from '../../images/yell-logo.webp';
 import HeroSection from '../HeroSection';
 import PromoSection from './PromoSection';
 import LinkListSection from '../LinkListSection';
@@ -77,7 +76,7 @@ export class HomeRoute extends Component {
             <>
                 <Header>
                     <HeaderContentContainer>
-                        <YellLogoFull src={YellLogo} alt="The Yell logo" />
+                        <YellLogoFull />
                         <LoginLink pushRight />
                     </HeaderContentContainer>
                 </Header>

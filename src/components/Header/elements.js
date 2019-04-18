@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Nav = styled.nav`
     background: #333;
-    padding: 10px 30px;
+    padding: 10px 0;
 `;
 
 export const NavRow = styled(Row)`

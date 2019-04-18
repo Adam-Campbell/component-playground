@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const SVG = styled.svg`
     width: 20px;
-    
+    max-height: 30px;
 `;
 
 const Star = ({ value, idName }) => (

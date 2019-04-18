@@ -81,11 +81,6 @@ export const IconContainer = styled.div`
     align-items: center;
 `;
 
-/*
-
-
-*/
-
 export const InputElement = styled.input`
     padding: 10px;
     font-family: 'Lato';
@@ -95,6 +90,8 @@ export const InputElement = styled.input`
     outline: none;
     border: none;
     width: 100px;
+    background: ${({ theme }) => theme.colors.background };
+    z-index: 10;
     @media (max-width: 1249px) {
         transition: all ease-out 0.2s;
         ${({ isActive }) => isActive && `

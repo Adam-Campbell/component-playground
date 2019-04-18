@@ -26,7 +26,7 @@ import {
 
 const truncateString = (str, max) => str.length <= max ? str : str.slice(0, max).concat('...');
 
-const InfoColumn = ({ name, categories, email, url, phone, address, mainServices, quote, isLongTermCustomer }) => (
+const InfoColumn = ({ name, categories, email, url, phone, address, bulletPoints, quote, isLongTermCustomer }) => (
     <InfoColContainer>
 
         <BusinessNameRow>
@@ -72,13 +72,13 @@ const InfoColumn = ({ name, categories, email, url, phone, address, mainServices
             </AddressLink>
         </div>
 
-        {mainServices.length > 0 && 
+        {bulletPoints.length > 0 && 
             <div>
                 <ServicesList>
-                    {mainServices.map((service, index) => (
+                    {bulletPoints.map((bulletPoint, index) => (
                         <ServiceListItem key={index}>
                             <ServiceBulletPoint>●</ServiceBulletPoint>
-                            {service}
+                            {bulletPoint}
                         </ServiceListItem>
                     ))}
                 </ServicesList>
@@ -103,7 +103,7 @@ InfoColumn.propTypes = {
     url: PropTypes.string,
     phone: PropTypes.string,
     address: PropTypes.string,
-    mainServices: PropTypes.arrayOf(PropTypes.string),
+    bulletPoints: PropTypes.arrayOf(PropTypes.string),
     quote: PropTypes.string,
     isLongTermCustomer: PropTypes.bool
 };

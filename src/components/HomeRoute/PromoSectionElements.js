@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import SpriteSheet from '../SpriteSheet';
 
 export const StyledPromoSection = styled.section`
-	background-color: #0083c3;
+	background-color: ${({ theme }) => theme.colors.textAlt };
 	padding-top: 40px;
 	padding-bottom: 40px;
 	background-image: linear-gradient(
@@ -24,8 +24,8 @@ export const PodRow = styled(Row)`
 
 export const PromoPod = styled.div`
 	width: calc(33.33333% - 20px);
-	background: white;
-	color: #222;
+	background: ${({ theme }) => theme.colors.background };
+	color: ${({ theme }) => theme.colors.textPrimary };
 	border-radius: 4px;
 	display: flex;
 	flex-direction: column;
@@ -60,7 +60,7 @@ export const PodActionText = styled.p`
 	font-family: 'Lato';
 	font-weight: 400;
 	font-size: 1.1rem;
-	color: #0083c3;
+	color: ${({ theme }) => theme.colors.textAlt };
 	margin-top: 0;
 	margin-bottom: 0;
 	${PromoPod}:hover & {
@@ -77,15 +77,15 @@ export const ActionTextContainer = styled.div`
 `;
 
 export const ActionIcon = styled(FontAwesomeIcon)`
-	color: #0083c3;
+	color: ${({ theme }) => theme.colors.textAlt };
 	font-size: 1.5rem;
 	margin-left: 10px;
 `;
 
 export const AppPromoPod = styled.div`
     width: calc(33.33333% - 20px);
-	background: white;
-	color: #222;
+	background: ${({ theme }) => theme.colors.background };
+	color: ${({ theme }) => theme.colors.textPrimary };
 	border-radius: 4px;
     padding: 30px;
     background-image: url('${YellFingers}');

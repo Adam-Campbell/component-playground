@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import { ShortlistContext } from '../ShortlistContext';
 import ShortlistSummaryItem from './ShortlistSummaryItem'; 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkedAlt, faList } from '@fortawesome/free-solid-svg-icons';
 import {
     StyledShortlistSummary,

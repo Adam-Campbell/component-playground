@@ -9,7 +9,7 @@ export const StandardLink = styled(Link)`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 0.85rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     text-decoration: none;
     &:hover {
         text-decoration: underline;

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { ResultsRoute } from './ResultsRoute';
 import {
     locationData
@@ -52,16 +51,13 @@ export class ResultsRouteContainer extends Component {
      * updates the UI with the new information and makes the request for new data.
      */
     componentDidUpdate(prevProps) {
-        console.log('componentDidUpdate called', Date.now());
         if (
             prevProps.currentSearchService === this.props.currentSearchService &&
             prevProps.currentSearchLocation === this.props.currentSearchLocation &&
             prevProps.location.search === this.props.location.search
         ) {
-            console.log('nothing changed branch reached', Date.now());
             return;
         }
-        console.log('something has changed');
         let formState = {
             currentSearchService: this.props.currentSearchService,
             currentSearchLocation: this.props.currentSearchLocation
@@ -69,7 +65,6 @@ export class ResultsRouteContainer extends Component {
         let filterState = mergeState(
             queryString.parse(this.props.location.search)
         );
-        console.log(filterState);
         this.setState(state => ({
             ...formState,
             ...filterState
@@ -152,10 +147,9 @@ export class ResultsRouteContainer extends Component {
      * Updates the service field in the form at the top of the page.
      */
     updateServiceFormField = (newValue) => {
-        console.log('Parent callback reached: ', Date.now());
         this.setState(() => ({
             service: newValue    
-        }), () => console.log('Parent state updated', Date.now()));
+        }));
     };
 
     /**
@@ -171,13 +165,9 @@ export class ResultsRouteContainer extends Component {
      * Updates the criteria that results are currently sorted by.
      */
     updateSortCriteria = (newSortCriteria) => {
-        console.log('Sort criteria function called: ', Date.now());
         this.setState({
             sortby: newSortCriteria
-        }, () => {
-            console.log('sortBy state updated: ', Date.now());
-            this.redirectURL()
-        });
+        }, this.redirectURL);
     };
 
     /**
@@ -185,7 +175,6 @@ export class ResultsRouteContainer extends Component {
      * then redirects to that URL via the browser history API.
      */
     redirectURL = () => {
-        console.log('redirectURL was called');
         const {
             service,
             location,
@@ -242,13 +231,8 @@ export class ResultsRouteContainer extends Component {
             offset
         } = this.state;
         const { currentSearchService, currentSearchLocation } = this.props;
-        //const { isFetching, results } = this.context;
-        //const isFetching = this.context.isFetching;
-        //const results = [];
-
         const updateDistanceFilter = this.updateLocationFilters('distance', 'locationrefinement');
         const updateLocationRefinement = this.updateLocationFilters('locationrefinement', 'distance');
-        //const categoryData = getAdditionalCategories(results);
         const breadcrumbsData = constructBreadcumbData(currentSearchLocation, currentSearchService);
 
         return <ResultsRoute 

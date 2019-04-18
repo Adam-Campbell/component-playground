@@ -59,11 +59,11 @@ const LoaderText = styled.p`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 1.1rem;
-    color: #222; 
+    color: ${({ theme }) => theme.colors.textPrimary }; 
 `;
 
 const LoaderLine = styled.span`
-    background-color: #222;
+    background-color: ${({ theme }) => theme.colors.textPrimary };
     width: 10px;
     height: 100%;
     display: inline-block;

@@ -20,6 +20,7 @@ export const constructDBRequestObject = (service, location, category, contentreq
     if (contentrequirements.includes('photos')) req.requirePhotos = true;
     if (contentrequirements.includes('reviews')) req.requireReviews = true;
     if (contentrequirements.includes('messaging')) req.requireMessaging = true;
+    if (contentrequirements.includes('videos')) req.requireVideos = true;
     return req;
 };
 

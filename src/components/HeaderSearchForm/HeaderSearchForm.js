@@ -11,7 +11,7 @@ import {
     SubmitButton
 } from './elements';
 
-export const ResultsSearchForm = (props) => (
+export const HeaderSearchForm = (props) => (
     <SearchFormStateContainer
         serviceFieldValue={props.serviceFieldValue}
         locationFieldValue={props.locationFieldValue}
@@ -68,7 +68,7 @@ export const ResultsSearchForm = (props) => (
     </SearchFormStateContainer>
 );
 
-ResultsSearchForm.propTypes = {
+HeaderSearchForm.propTypes = {
     serviceFieldValue: PropTypes.string.isRequired,
     locationFieldValue: PropTypes.string.isRequired,
     handleServiceFieldUpdate: PropTypes.func.isRequired,

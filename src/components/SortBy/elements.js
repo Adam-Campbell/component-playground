@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Container = styled.div`
     position: relative;
-    border: solid 1px #aaa;
+    border: solid 1px ${({ theme }) => theme.colors.UIPrimary };
     border-radius: ${({ isOpen }) => isOpen ? '3px 3px 0 0' : '3px'};
     ${({ isOpen }) => isOpen && 'border-bottom-color: #f2f2f2;'}
     background: #f2f2f2;
@@ -16,7 +16,7 @@ export const Container = styled.div`
 `;
 
 export const SortLegend = styled(Legend)`
-    color: #0083c3;
+    color: ${({ theme }) => theme.colors.textAlt };
     padding: 5px 10px;
     strong {
         margin-left: 8px;
@@ -24,7 +24,7 @@ export const SortLegend = styled(Legend)`
 `;
 
 export const SortLegendChevron = styled(LegendChevron)`
-    color: #0083c3;
+    color: ${({ theme }) => theme.colors.textAlt };
 `;
 
 export const LegendSortIcon = styled(FontAwesomeIcon)`

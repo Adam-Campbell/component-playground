@@ -4,7 +4,7 @@ export const StyledShortlistButton = styled.button`
     font-family: 'Lato';
     font-weight: 300;
     font-size: 0.85rem;
-    color: #0083c3;
+    color: ${({ theme }) => theme.colors.textAlt };
     margin-bottom: 5px;
     background: none;
     border: none;

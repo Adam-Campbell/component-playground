@@ -17,7 +17,7 @@ export const BusinessCard = (props) => (
             email={props.email}
             url={props.url}
             address={props.address}
-            mainServices={props.mainServices}
+            bulletPoints={props.bulletPoints}
             quote={props.quote}
             isLongTermCustomer={props.isLongTermCustomer}
         />
@@ -38,7 +38,7 @@ BusinessCard.propTypes = {
     email: PropTypes.string,
     categories: PropTypes.arrayOf(PropTypes.string),
     address: PropTypes.string.isRequired,
-    mainServices: PropTypes.arrayOf(PropTypes.string),
+    bulletPoints: PropTypes.arrayOf(PropTypes.string),
     quote: PropTypes.string,
     starRating: PropTypes.number,
     numberOfRatings: PropTypes.number.isRequired,

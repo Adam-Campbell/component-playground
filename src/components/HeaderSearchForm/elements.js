@@ -24,17 +24,17 @@ export const SubmitButton = styled.button`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 1.1rem;
-    color: #222;
-    background: #fedb00;
-    border: solid 1px #fedb00;
-    border-radius: 0 3px 3px 0;
+    color: ${({ theme }) => theme.colors.textPrimary };
+    background: ${({ theme }) => theme.colors.brand };
+    border: solid 1px ${({ theme }) => theme.colors.brand };
+    border-radius: 3px;
     outline: none;
     cursor: pointer;
     transition: all ease-out 0.2s;
     &:hover,
     &:focus {
-        background: #cab010;
-        border-color: #cab010;
+        background: ${({ theme }) => theme.colors.brandDarkened };
+        border-color: ${({ theme }) => theme.colors.brandDarkened };
     }
     span {
         display: none;
@@ -65,7 +65,7 @@ const getBorderColor = (isActive, hasError) => {
 }
 
 export const InputRow = styled.div`
-    background: #fff;
+    background: ${({ theme }) => theme.colors.background };
     display: flex;
     align-items: center;
     border: solid 1px;
@@ -73,7 +73,7 @@ export const InputRow = styled.div`
 `;
 
 export const IconContainer = styled.div`
-    color: ${({ isActive }) => isActive ? '#fedb00' : '#aaa'};
+    color: ${({ isActive, theme }) => isActive ? theme.colors.brand : theme.colors.UIPrimary};
     font-size: 1.25rem;
     width: 40px;
     display: flex;
@@ -91,7 +91,7 @@ export const InputElement = styled.input`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 1.1rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     outline: none;
     border: none;
     width: 100px;
@@ -111,7 +111,7 @@ export const ClearFieldIconContainer = styled.div`
     padding-left: 10px;
     padding-right: 10px;
     font-size: 1.25rem;
-    color: #aaa;
+    color: ${({ theme }) => theme.colors.UIPrimary };
     .fa-times {
         cursor: pointer;
     }
@@ -119,12 +119,12 @@ export const ClearFieldIconContainer = styled.div`
 
 export const SuggestionsList = styled.ul`
     position: absolute;
-    background: white;
+    background: ${({ theme }) => theme.colors.background };
     margin-top: 0;
     margin-bottom: 0;
     padding-left: 0;
     list-style-type: none;
-    border: solid 1px #aaa;
+    border: solid 1px ${({ theme }) => theme.colors.UIPrimary };
     border-top: none;
     width: 100%;
     z-index: 1000;
@@ -134,7 +134,7 @@ export const SuggestionItem = styled.li`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 0.85rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     padding: 10px;
     text-align: left;
     ${props => !props.isPlaceholder && `
@@ -147,7 +147,7 @@ export const SuggestionItem = styled.li`
 
 export const WarningContainer = styled.div`
     background-color: #e74d3d;
-    color: white;
+    color: #fff;
     width: 100%;
     display: flex;
     align-items: center;
@@ -161,7 +161,7 @@ export const WarningText = styled.p`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 0.85rem;
-    color: white;
+    color: #fff;
     margin-top: 0;
     margin-bottom: 0;
     margin-left: 10px;

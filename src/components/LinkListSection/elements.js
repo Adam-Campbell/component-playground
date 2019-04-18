@@ -3,13 +3,13 @@ import { Row } from '../LayoutElements';
 import { Link } from 'react-router-dom';
 
 export const StyledLinkListSection = styled.section`
-    background: white;
+    background: ${({ theme }) => theme.colors.background };
     padding: 30px 0;
     min-height: 300px;
 `;
 
 export const ContentContainer = styled(Row)`
-    border-top: solid 1px #aaa;
+    border-top: solid 1px ${({ theme }) => theme.colors.UIPrimary };
 `;
 
 export const PrimaryLinkContainer = styled.div`
@@ -21,7 +21,7 @@ export const PrimaryLink = styled(Link)`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 1.25rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     text-decoration: none;
     &:hover {
         text-decoration: underline;
@@ -51,7 +51,7 @@ export const ListItemLink = styled(Link)`
     font-family: 'Lato';
     font-size: 1rem;
     font-weight: 400;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     text-decoration: none;
     &:hover {
         text-decoration: underline;

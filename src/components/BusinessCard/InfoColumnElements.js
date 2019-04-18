@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export const InfoColContainer = styled.div`
     width: 65%;
     padding: 0 10px;
-    border-right: solid 1px #aaa;
+    border-right: solid 1px ${({ theme }) => theme.colors.UIPrimary };
 `;
 
 export const BusinessNameRow = styled.div`
@@ -16,14 +16,14 @@ export const BusinessNameRow = styled.div`
 export const BusinessName = styled.h1`
     font-family: 'Montserrat';
     font-weight: 700;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     text-decoration: none;
     margin: 5px 10px;
 `;
 
 export const LinkWrapper = styled(Link)`
     text-decoration: none;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     &:hover {
         text-decoration: underline;
     }
@@ -82,7 +82,7 @@ export const CategoryLabel = styled.p`
     margin-bottom: 5px;
     margin-left: 10px;
     margin-right: 10px;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
 `;
 
 export const LinkRow = styled.div`
@@ -92,7 +92,7 @@ export const LinkRow = styled.div`
 export const ButtonLink = styled(Link)`
     display: flex;
     align-items: center;
-    background: #fedb00;
+    background: ${({ theme }) => theme.colors.brand };
     transition: background ease-out 0.2s;
     border: none;
     border-radius: 3px;
@@ -100,13 +100,13 @@ export const ButtonLink = styled(Link)`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 0.85rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     padding: 7px 12px;
     & + & {
         margin-left: 10px;
     }
     &:hover {
-        background: #cab010;
+        background: ${({ theme }) => theme.colors.brandDarkened };
     }
     .svg-inline--fa {
         margin-right: 5px;
@@ -115,7 +115,7 @@ export const ButtonLink = styled(Link)`
 `;
 
 export const AddressLink = styled(Link)`
-    color: #0083c3;
+    color: ${({ theme }) => theme.colors.textAlt };
     font-family: 'Lato';
     font-weight: 400;
     font-size: 0.85rem;
@@ -142,7 +142,7 @@ export const ServiceListItem = styled.li`
     font-family: 'Lato';
     font-weight: 300;
     font-size: 0.85rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 3px;
@@ -170,7 +170,7 @@ export const QuoteLink = styled(Link)`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 0.75rem;
-    color: #0083c3;
+    color: ${({ theme }) => theme.colors.textAlt };
     text-decoration: none;
     &:hover {
         text-decoration: underline;

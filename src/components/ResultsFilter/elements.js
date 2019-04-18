@@ -11,14 +11,14 @@ export const TitleContainer = styled.div`
 export const FilterIcon = styled(FontAwesomeIcon)`
     font-size: 1.25rem;
     margin-right: 20px;
-    color: #aaa;
+    color: ${({ theme }) => theme.colors.UIPrimary };
 `;
 
 export const Title = styled.p`
     font-family: 'Lato';
     font-weight: 700;
     font-size: 1.25rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     margin-top: 0;
     margin-bottom: 0;
 `;

@@ -5,7 +5,7 @@ export const ShortlistCountContainer = styled.div`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 1.1rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     flex-shrink: 0;
     margin: 0 auto 0 0;
     height: 42px;
@@ -17,7 +17,7 @@ export const ShortlistCountContainer = styled.div`
 export const ShortlistCountLink = styled(Link)`
     display: flex;
     align-items: center;
-    color: #0083c3;
+    color: ${({ theme }) => theme.colors.textAlt };
     text-decoration: none;
     &:hover p {
         text-decoration: underline;

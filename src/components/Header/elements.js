@@ -29,7 +29,7 @@ export const StyledNavLink = styled(Link)`
     font-size: 0.85rem;
     font-weight: 400;
     text-decoration: none;
-    color: white;
+    color: #fff;
     &:hover {
         text-decoration: underline;
     }
@@ -37,7 +37,7 @@ export const StyledNavLink = styled(Link)`
 
 export const StyledActiveNavLink = styled(StyledNavLink)`
     position: relative;
-    color: gold;
+    color: ${({ theme }) => theme.colors.brand };
     &:before {
         content: ' ';
         position: absolute;
@@ -48,12 +48,12 @@ export const StyledActiveNavLink = styled(StyledNavLink)`
         display: block;
         border-left: solid 8px transparent;
         border-right: solid 8px transparent;
-        border-bottom: solid 8px white;
+        border-bottom: solid 8px #fff;
     }
 `;
 
 export const AdditionalContentContainer = styled.div`
     background: white;
     padding: 15px;
-    border-bottom: solid gold 4px;
+    border-bottom: solid ${({ theme }) => theme.colors.brandAlt } 4px;
 `;

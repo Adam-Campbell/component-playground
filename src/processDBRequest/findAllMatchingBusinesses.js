@@ -108,6 +108,9 @@ const constructMatchersArray = (req) => {
     if (req.requireMessaging) {
         matchersArray.push(doesHaveMessaging);
     }
+    if (req.requireVideos) {
+        matchersArray.push(doesHaveVideos);
+    }
     return matchersArray;
 };
 

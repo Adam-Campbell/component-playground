@@ -6,7 +6,7 @@ export const BreadcrumbsList = styled.ol`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 0.85rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary};
     margin: 0;
     padding-left: 0;
 `;
@@ -18,7 +18,7 @@ export const BreadcrumbsListItem = styled.li`
 
 export const BreadcrumbsLink = styled(Link)`
     display: inline-block;
-    color: #0083c3;
+    color: ${({ theme }) => theme.colors.textAlt };
     text-decoration: none;
     &:hover {
         text-decoration: underline;

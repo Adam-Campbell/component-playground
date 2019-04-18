@@ -19,6 +19,6 @@ export const HeroTitle = styled.h1`
     margin-top: 100px;
     margin-bottom: 40px;
     span {
-        color: #fedb00;
+        color: ${({ theme }) => theme.colors.brand };
     }
 `;

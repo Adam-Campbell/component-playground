@@ -7,7 +7,6 @@
  * @returns {Array} - a subset of the original dataset.
  */
 const networkSim = (data) => async (query) => {
-    //console.log('networkSim was called');
     const MSDelay = Math.floor(Math.random() * 300);
     await new Promise(resolve => setTimeout(resolve, MSDelay));
     return data.filter(el => el.includes(query));

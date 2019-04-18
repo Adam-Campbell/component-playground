@@ -5,7 +5,6 @@ import {
     RatingsColContainer, 
     ReviewLink,
     AdditionalLinksContainer,
-    ShortlistLink,
     RatingsColButtonLink
 } from './RatingsColumnElements';
 import ShortlistButton from './ShortlistButton';
@@ -28,13 +27,6 @@ const RatingsColumn = ({ starRating, id, numberOfRatings, businessObject }) => (
         </AdditionalLinksContainer>
     </RatingsColContainer>
 );
-
-
-/*
-<ShortlistLink to="/">
-                Shortlist
-            </ShortlistLink>
-*/
 
 RatingsColumn.propTypes = {
     starRating: PropTypes.number,

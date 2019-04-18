@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { ResultsContext } from '../ResultsContext';
 import Loader from '../Loader';
@@ -9,8 +9,12 @@ class ResultsCollection extends PureComponent {
 
     static contextType = ResultsContext;
 
+    static propTypes = {
+        offset: PropTypes.number.isRequired,
+        updateOffset: PropTypes.func.isRequired
+    };
+
     render() {
-        console.log('ResultsCollection component has rerendered');
         const { isFetching, results } = this.context;
         const { offset, updateOffset } = this.props;
         return isFetching ? (

@@ -6,7 +6,7 @@ export const Container = styled.div`
 
 export const  Fieldset = styled.fieldset`
     border: none;
-    border-bottom: solid 1px #aaa;
+    border-bottom: solid 1px ${({ theme }) => theme.colors.UIPrimary };
     padding: 10px 5px;
 `;
 
@@ -14,13 +14,13 @@ export const Legend = styled.legend`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 1.1rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     width: 100%;
     display: flex;
     align-items: center;
     cursor: pointer;
     &:hover {
-        color: #0083c3;
+        color: ${({ theme }) => theme.colors.textAlt };
     }
 `;
 
@@ -33,11 +33,11 @@ export const LegendContentContainer = styled.div`
 export const LegendChevron = styled.span`
     transform: ${({ isOpen }) => isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
     transition: transform ease-out 0.2s;
-    color: #aaa;
+    color: ${({ theme }) => theme.colors.UIPrimary };
     font-size: 1.5rem;
     margin-left: auto;
     ${Legend}:hover & {
-        color: #0083c3;
+        color: ${({ theme }) => theme.colors.textAlt };
     }
 `;
 
@@ -68,14 +68,14 @@ export const InputLabel = styled.label`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 0.85rem;
-    color: #222; 
+    color: ${({ theme }) => theme.colors.textPrimary }; 
     display: flex;
     align-items: center;
     cursor: pointer;
     ${({ capitalize }) => capitalize && 'text-transform: capitalize;'}
     &:hover {
         text-decoration: underline;
-        color: #0083c3
+        color: ${({ theme }) => theme.colors.textAlt }
     }
     &:before {
         content: ' ';
@@ -83,7 +83,7 @@ export const InputLabel = styled.label`
         height: 14px;
         width: 14px;
         border-radius: 50%;
-        border: solid #aaa 1px;
+        border: solid ${({ theme }) => theme.colors.UIPrimary } 1px;
         background: transparent;
         transition: all ease-out 0.2s;
         margin-right: 10px;
@@ -92,7 +92,7 @@ export const InputLabel = styled.label`
         font-weight: 700;
     }
     ${Input}:checked + &:before {
-        background: #fedb00;
+        background: ${({ theme }) => theme.colors.brand };
         
     }
 `;

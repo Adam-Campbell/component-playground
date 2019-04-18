@@ -7,10 +7,10 @@ const SVG = styled.svg`
 `;
 
 const Star = ({ value, idName }) => (
-    <SVG  id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1073.15 1020.63">
+    <SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1073.15 1020.63">
         <defs>
             <linearGradient id={idName}>
-                <stop offset={`${value*100}%`} stopColor="gold" />
+                <stop offset={`${value*100}%`} stopColor="#ffd100" />
                 <stop offset={`${value*100}%`} stopColor="gainsboro" />
             </linearGradient>  
         </defs>

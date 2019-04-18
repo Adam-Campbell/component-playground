@@ -16,18 +16,6 @@ export const Logo = styled(SpriteSheet)`
     flex-shrink: 0;
 `;
 
-export const MapPod = styled.div`
-    width: 100%;
-    background: rebeccapurple;
-    height: 90px;
-    border: none;
-    border-radius: 3px;
-    display: none;
-    @media (min-width: 960px) {
-        display: initial;
-    }
-`;
-
 export const BreadcrumbsRow = styled(Row)`
     display: flex;
     padding-top: 10px;
@@ -46,7 +34,7 @@ export const ResultsHeaderRow = styled(Row)`
     flex-wrap: wrap;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    border-bottom: solid 1px #aaa;
+    border-bottom: solid 1px ${({ theme }) => theme.colors.UIPrimary };
     @media (min-width: 960px) {
         flex-wrap: nowrap;
     }
@@ -56,7 +44,7 @@ export const ResultsSummary = styled.h1`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 1.5rem;
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     width: 100%;
     span {
         text-transform: capitalize;
@@ -71,11 +59,11 @@ export const ResultsHeaderButton = styled.button`
     font-family: 'Lato';
     font-size: 1.1rem;
     font-weight: 400;
-    color: ${({ isActive }) => isActive ? '#fff' : '#222'};
-    border: solid 1px #aaa;
+    color: ${({ isActive, theme }) => isActive ? '#fff' : theme.colors.textPrimary};
+    border: solid 1px ${({ theme }) => theme.colors.UIPrimary };
     border-radius: 3px;
     padding: 10px 20px;
-    background: ${({ isActive }) => isActive ? '#339ccf' : '#fff'};
+    background: ${({ isActive, theme }) => isActive ? '#339ccf' : theme.colors.background};
     cursor: pointer;
     text-decoration: none;
     width: 160px;

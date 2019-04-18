@@ -82,7 +82,7 @@ export class SortBy extends Component {
                                         this.toggleOpen();
                                     }}
                                 />
-                                <InputLabel htmlFor={option.id}>
+                                <InputLabel htmlFor={option.id} capitalize>
                                     {option.label}
                                 </InputLabel>
                             </InputContainer>

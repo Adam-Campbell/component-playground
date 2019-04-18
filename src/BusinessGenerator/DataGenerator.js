@@ -1,7 +1,7 @@
 /**
  * Base class that all of the other generator classes inherit methods from. 
  */
-class Datagen {
+class DataGenerator {
 
     /**
      * Generates a random id string comprised of 16 characters in the range 0 - 9
@@ -110,4 +110,4 @@ class Datagen {
     }
 }
 
-export default Datagen;
+export default DataGenerator;

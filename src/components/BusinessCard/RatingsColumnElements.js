@@ -12,7 +12,7 @@ export const ReviewLink = styled(Link)`
     font-family: 'Lato';
     font-weight: 400;
     font-size: 1rem;
-    color: #0083c3;
+    color: ${({ theme }) => theme.colors.textAlt };
     text-decoration: none;
     &:hover {
         text-decoration: underline;
@@ -26,20 +26,9 @@ export const AdditionalLinksContainer = styled.div`
     align-items: center;
 `;
 
-export const ShortlistLink = styled(Link)`
-    font-family: 'Lato';
-    font-weight: 300;
-    font-size: 0.85rem;
-    color: #0083c3;
-    text-decoration: none;
-    margin-bottom: 5px;
-    &:hover {
-        text-decoration: underline;
-    }
-`;
 
 export const RatingsColButtonLink = styled(Link)`
-    background: #fedb00;
+    background: ${({ theme }) => theme.colors.brand };
     transition: background ease-out 0.2s;
     border: none;
     border-radius: 3px;
@@ -51,6 +40,6 @@ export const RatingsColButtonLink = styled(Link)`
     width: 100%;
     text-align: center;
     &:hover {
-        background: #cab010;
+        background: ${({ theme }) => theme.colors.brandDarkened };
     }
 `;

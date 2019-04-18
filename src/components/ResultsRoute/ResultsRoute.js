@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Header';
 import LoginLink from '../LoginLink';
-import SearchForm from '../ResultsSearchForm';
-import BusinessCard from '../BusinessCard';
+import HeaderSearchForm from '../HeaderSearchForm';
 import ResultsFilter from '../ResultsFilter';
 import Breadcrumbs from '../Breadcrumbs';
 import SocialShareLink from '../SocialShareLink';
@@ -12,7 +11,6 @@ import { faSlidersH, faMapMarkerAlt, faAngleLeft } from '@fortawesome/free-solid
 import {
     HeaderContentContainer,
     Logo,
-    MapPod,
     BreadcrumbsRow,
     SocialShareLinksContainer,
     ResultsHeaderRow,
@@ -43,7 +41,7 @@ export const ResultsRoute = (props) => (
                 <Header>
                     <HeaderContentContainer>
                         <Logo as="a" href="/" />
-                        <SearchForm 
+                        <HeaderSearchForm 
                             serviceFieldValue={props.serviceFieldValue}
                             locationFieldValue={props.locationFieldValue}
                             handleServiceFieldUpdate={props.updateServiceFormField}
@@ -89,7 +87,6 @@ export const ResultsRoute = (props) => (
                 </ResultsHeaderRow>
                 <SplitLayoutContainer>
                     <SplitLayoutAside showAside={props.showingFilters}>
-                        <MapPod />
                         <ResultsFilter 
                             categoryData={props.selectedCategory === null ? 
                                             additionalCategories : 
@@ -131,7 +128,6 @@ ResultsRoute.propTypes = {
     currentSearchLocation: PropTypes.string,
     sortCriteria: PropTypes.string.isRequired,
     updateSortCriteria: PropTypes.func.isRequired,
-    //categoryData: PropTypes.arrayOf(PropTypes.object).isRequired,
     locationData: PropTypes.arrayOf(PropTypes.object).isRequired,
     selectedCategory: PropTypes.string,
     selectedContentRequirements: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -142,18 +138,3 @@ ResultsRoute.propTypes = {
     updateDistanceFilter: PropTypes.func.isRequired,
     updateLocationRefinement: PropTypes.func.isRequired
 };
-
-
-
-
-/*
-
-{isFetching ? (
-                            <Loader />
-                        ) : (
-                            results.map(business => (
-                                <BusinessCard business={business} key={business.id} />
-                            ))
-                        )}
-
-*/

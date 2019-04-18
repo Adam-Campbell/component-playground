@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const Text = styled.p`
     font-family: 'Lato';
     font-weight: ${props => props.bold ? 700 : 300};
-    color: #222;
+    color: ${({ theme }) => theme.colors.textPrimary };
     font-size: 0.85rem;
     margin-top: 0;
     margin-bottom: 0;
@@ -32,7 +32,7 @@ export const StarRating = ({ rating, starGroupName, numOfRatings }) => (
         <div>
             {new Array(5).fill(0).map((el, index) => (
                 <Star 
-                    value={Math.max(rating-index, 0)}
+                    value={Math.min(1, Math.max(rating-index, 0))}
                     idName={`${starGroupName}-${index}`} 
                     key={`${starGroupName}-${index}`} 
                 />

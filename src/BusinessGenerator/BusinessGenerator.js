@@ -1,6 +1,5 @@
 import { 
     locations,
-    services,
     services2d,
     TLDs,
     emailPrefixes,
@@ -99,6 +98,14 @@ export class BusinessGenerator extends DataGenerator {
             this.getRandomNumFromRange(1, 3)
         );
     }
+
+    getRandomBulletPoints() {
+        return this.probabilityGate(0.4) ? 
+            [] :
+            new Array(this.getRandomNumFromRange(4, 6))
+                .fill(0)
+                .map((el, index) => `Bullet point ${index+1}`);
+    };
   
     /**
      * Utilises the other class methods to construct and return a business object.
@@ -126,6 +133,7 @@ export class BusinessGenerator extends DataGenerator {
         const messaging = this.probabilityGate(0.4);
         const isLongTermCustomer = this.probabilityGate(0.2);
         const profileImage = this.getRandomArrayElement(this.profileImages);
+        const bulletPoints = this.getRandomBulletPoints();
         const business = {
             id,
             name: businessName,
@@ -141,7 +149,8 @@ export class BusinessGenerator extends DataGenerator {
             videos,
             messaging,
             isLongTermCustomer,
-            profileImage
+            profileImage,
+            bulletPoints
         };
         return business;
     }
